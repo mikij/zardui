@@ -2,6 +2,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 
 import { ZardToggleGroupComponent, ZardToggleGroupItem } from './toggle-group.component';
+import { BoldIcon, ItalicIcon } from 'lucide-angular';
 
 describe('ZardToggleGroupComponent', () => {
   let component: ZardToggleGroupComponent;
@@ -152,26 +153,26 @@ describe('ZardToggleGroupComponent', () => {
 
   it('should render icons when provided', () => {
     const itemsWithIcons: ZardToggleGroupItem[] = [
-      { value: 'bold', icon: 'icon-bold', ariaLabel: 'Toggle bold' },
-      { value: 'italic', icon: 'icon-italic', ariaLabel: 'Toggle italic' },
+      { value: 'bold', icon: BoldIcon, ariaLabel: 'Toggle bold' },
+      { value: 'italic', icon: ItalicIcon, ariaLabel: 'Toggle italic' },
     ];
 
     fixture.componentRef.setInput('items', itemsWithIcons);
     fixture.detectChanges();
 
-    const buttons = fixture.nativeElement.querySelectorAll('button');
-    expect(buttons[0].querySelector('.icon-bold')).toBeTruthy();
-    expect(buttons[1].querySelector('.icon-italic')).toBeTruthy();
+    const buttons = fixture.nativeElement.querySelectorAll('button') as HTMLButtonElement[];
+    expect(buttons.length).toBe(2);
+    buttons.forEach(button => expect(button.querySelector('.lucide')).toBeTruthy());
   });
 
   it('should render both icon and label when provided', () => {
-    const itemsWithIconsAndLabels: ZardToggleGroupItem[] = [{ value: 'bold', icon: 'icon-bold', label: 'Bold', ariaLabel: 'Toggle bold' }];
+    const itemsWithIconsAndLabels: ZardToggleGroupItem[] = [{ value: 'bold', icon: BoldIcon, label: 'Bold', ariaLabel: 'Toggle bold' }];
 
     fixture.componentRef.setInput('items', itemsWithIconsAndLabels);
     fixture.detectChanges();
 
     const button = fixture.nativeElement.querySelector('button');
-    const icon = button.querySelector('.icon-bold');
+    const icon = button.querySelector('.lucide');
     const textSpan = button.querySelector('span:not([class*="icon"])');
 
     expect(icon).toBeTruthy();

@@ -1,12 +1,13 @@
 ```angular-ts showLineNumbers copyButton
 import { Component } from '@angular/core';
+import { BoldIcon, ItalicIcon, LucideAngularModule, UnderlineIcon } from 'lucide-angular';
 
 import { ZardToggleGroupComponent, ZardToggleGroupItem } from '../toggle-group.component';
 
 @Component({
   selector: 'demo-toggle-group-sizes',
   standalone: true,
-  imports: [ZardToggleGroupComponent],
+  imports: [LucideAngularModule, ZardToggleGroupComponent],
   template: `
     <div class="space-y-4">
       <div>
@@ -30,17 +31,17 @@ export default class ToggleGroupSizesComponent {
   items: ZardToggleGroupItem[] = [
     {
       value: 'bold',
-      icon: 'icon-bold',
+      icon: BoldIcon,
       ariaLabel: 'Toggle bold',
     },
     {
       value: 'italic',
-      icon: 'icon-italic',
+      icon: ItalicIcon,
       ariaLabel: 'Toggle italic',
     },
     {
       value: 'underline',
-      icon: 'icon-underline',
+      icon: UnderlineIcon,
       ariaLabel: 'Toggle underline',
     },
   ];

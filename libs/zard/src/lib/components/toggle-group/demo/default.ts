@@ -1,28 +1,29 @@
 import { Component } from '@angular/core';
+import { BoldIcon, ItalicIcon, LucideAngularModule, UnderlineIcon } from 'lucide-angular';
 
 import { ZardToggleGroupComponent, ZardToggleGroupItem } from '../toggle-group.component';
 
 @Component({
   selector: 'demo-toggle-group-default',
   standalone: true,
-  imports: [ZardToggleGroupComponent],
+  imports: [LucideAngularModule, ZardToggleGroupComponent],
   template: ` <z-toggle-group zMode="multiple" [items]="items" [defaultValue]="['italic']" (valueChange)="onToggleChange($event)"></z-toggle-group> `,
 })
 export default class ToggleGroupDefaultComponent {
   items: ZardToggleGroupItem[] = [
     {
       value: 'bold',
-      icon: 'icon-bold',
+      icon: BoldIcon,
       ariaLabel: 'Toggle bold',
     },
     {
       value: 'italic',
-      icon: 'icon-italic',
+      icon: ItalicIcon,
       ariaLabel: 'Toggle italic',
     },
     {
       value: 'underline',
-      icon: 'icon-underline',
+      icon: UnderlineIcon,
       ariaLabel: 'Toggle underline',
     },
   ];

@@ -5,11 +5,12 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
 import { mergeClasses } from '../../shared/utils/utils';
 import { toggleGroupVariants, toggleGroupItemVariants } from './toggle-group.variants';
+import { LucideAngularModule, LucideIconData } from 'lucide-angular';
 
 export interface ZardToggleGroupItem {
   value: string;
   label?: string;
-  icon?: string;
+  icon?: LucideIconData;
   disabled?: boolean;
   ariaLabel?: string;
 }
@@ -23,6 +24,7 @@ type OnChangeType = (value: string | string[]) => void;
   standalone: true,
   changeDetection: ChangeDetectionStrategy.OnPush,
   encapsulation: ViewEncapsulation.None,
+  imports: [LucideAngularModule],
   template: `
     <div [class]="classes()" role="group" [attr.data-orientation]="'horizontal'">
       @for (item of items(); track item.value; let i = $index) {
@@ -36,7 +38,7 @@ type OnChangeType = (value: string | string[]) => void;
           (click)="toggleItem(item)"
         >
           @if (item.icon) {
-            <span [class]="item.icon + ' w-4 h-4 shrink-0'"></span>
+            <span-lucide [img]="item.icon" [class]="iconSize() + ' shrink-0'"></span-lucide>
           }
           @if (item.label) {
             <span>{{ item.label }}</span>
@@ -68,6 +70,17 @@ export class ZardToggleGroupComponent implements ControlValueAccessor {
   readonly valueChange = output<string | string[]>();
 
   private internalValue = signal<string | string[] | undefined>(undefined);
+
+  protected readonly iconSize = computed(() => {
+    switch (this.zSize()) {
+      case 'sm':
+        return 'w-3 h-3';
+      case 'lg':
+        return 'w-5 h-5';
+      default:
+        return 'w-4 h-4';
+    }
+  });
 
   protected readonly classes = computed(() =>
     mergeClasses(
