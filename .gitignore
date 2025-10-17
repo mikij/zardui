@@ -33,6 +33,7 @@ npm-debug.log
 yarn-error.log
 testem.log
 /typings
+firebase-debug.log
 
 # System Files
 .DS_Store
@@ -45,3 +46,4 @@ Thumbs.db
 .firebaserc
 .cursor/rules/nx-rules.mdc
 .github/instructions/nx.instructions.md
+/.idx

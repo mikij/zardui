@@ -1,6 +1,5 @@
 ```css title="src/styles.css" expandable="true" copyButton
 @import 'tailwindcss';
-@import 'lucide-static/font/lucide.css';
 @plugin "tailwindcss-animate";
 
 @custom-variant dark (&:is(.dark *));
