@@ -1,4 +1,5 @@
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, computed, inject, input, signal, ViewEncapsulation } from '@angular/core';
+import { ChevronDownIcon, LucideAngularModule } from 'lucide-angular';
 
 import { ZardAccordionComponent } from './accordion.component';
 
@@ -10,6 +11,7 @@ import type { ClassValue } from 'clsx';
   standalone: true,
   changeDetection: ChangeDetectionStrategy.OnPush,
   encapsulation: ViewEncapsulation.None,
+  imports: [LucideAngularModule],
   template: `
     <div class="border-b border-border flex flex-1 flex-col cursor-pointer" [attr.data-state]="isOpen() ? 'open' : 'closed'">
       <button
@@ -28,7 +30,7 @@ import type { ClassValue } from 'clsx';
         <span class="group-hover:underline">
           {{ zTitle() }}
         </span>
-        <div class="transition-transform duration-200 icon-chevron-down text-lg" [class]="isOpen() ? 'rotate-180' : ''"></div>
+        <i-lucide [img]="ChevronDownIcon" class="transition-transform duration-200 w-4 h-4" [class.rotate-180]="isOpen()" />
       </button>
 
       <div
@@ -54,6 +56,8 @@ export class ZardAccordionItemComponent {
   readonly zTitle = input<string>('');
   readonly zValue = input<string>('');
   readonly class = input<ClassValue>('');
+
+  protected readonly ChevronDownIcon = ChevronDownIcon;
 
   private isOpenSignal = signal(false);
 
