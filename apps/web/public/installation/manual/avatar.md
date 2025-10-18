@@ -2,8 +2,10 @@
 
 ```angular-ts title="avatar.component.ts" expandable="true" expandableTitle="Expand" copyButton showLineNumbers
 import { ChangeDetectionStrategy, Component, computed, input, ViewEncapsulation } from '@angular/core';
+
 import { mergeClasses, transform } from '../../shared/utils/utils';
 import { avatarVariants, imageVariants, ZardAvatarImage, ZardAvatarVariants } from './avatar.variants';
+import { LoaderCircleIcon, LucideAngularModule } from 'lucide-angular';
 
 @Component({
   selector: 'z-avatar',
@@ -11,9 +13,10 @@ import { avatarVariants, imageVariants, ZardAvatarImage, ZardAvatarVariants } fr
   standalone: true,
   changeDetection: ChangeDetectionStrategy.OnPush,
   encapsulation: ViewEncapsulation.None,
+  imports: [LucideAngularModule],
   template: `
     @if (zLoading()) {
-      <span class="icon-loader-circle animate-spin {{ zLoading() }}"></span>
+      <i-lucide [img]="LoaderCircleIcon" class="w-4 h-4 animate-spin {{ zLoading() }}" />
     } @else {
       @if (zImage()?.fallback) {
         <span class="text-base absolute m-auto z-0">{{ zImage()?.fallback }}</span>
@@ -122,6 +125,8 @@ export class ZardAvatarComponent {
   readonly zImage = input<ZardAvatarImage['zImage'] | null>({ fallback: 'ZA' });
 
   readonly class = input<string>('');
+
+  protected readonly LoaderCircleIcon = LoaderCircleIcon;
 
   protected readonly containerClasses = computed(() =>
     mergeClasses(avatarVariants({ zType: this.zType(), zSize: this.zSize(), zShape: this.zShape(), zBorder: this.zBorder() }), this.class()),

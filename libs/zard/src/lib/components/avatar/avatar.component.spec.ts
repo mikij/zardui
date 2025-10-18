@@ -4,6 +4,7 @@ import { By } from '@angular/platform-browser';
 
 import { ZardAvatarComponent } from './avatar.component';
 import { ZardAvatarImage, ZardAvatarVariants } from './avatar.variants';
+import { LucideAngularComponent } from 'lucide-angular';
 
 @Component({
   standalone: true,
@@ -181,7 +182,7 @@ describe('ZardAvatarComponent', () => {
       hostComponent.zLoading = true;
       fixture.detectChanges();
 
-      const loaderElement = fixture.debugElement.query(By.css('.icon-loader-circle'));
+      const loaderElement = fixture.debugElement.query(By.directive(LucideAngularComponent));
       expect(loaderElement).toBeTruthy();
     });
 
@@ -189,13 +190,13 @@ describe('ZardAvatarComponent', () => {
       hostComponent.zLoading = true;
       fixture.detectChanges();
 
-      let loaderElement = fixture.debugElement.query(By.css('.icon-loader-circle'));
+      let loaderElement = fixture.debugElement.query(By.directive(LucideAngularComponent));
       expect(loaderElement).toBeTruthy();
 
       hostComponent.zLoading = false;
       fixture.detectChanges();
 
-      loaderElement = fixture.debugElement.query(By.css('.icon-loader-circle'));
+      loaderElement = fixture.debugElement.query(By.directive(LucideAngularComponent));
       expect(loaderElement).toBeNull();
     });
   });
