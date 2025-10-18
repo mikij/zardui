@@ -1,31 +1,32 @@
 ```angular-ts showLineNumbers copyButton
 import { Component } from '@angular/core';
+import { HouseIcon, LucideAngularModule, PuzzleIcon, SquareLibraryIcon } from 'lucide-angular';
 
 import { ZardBreadcrumbModule } from '../breadcrumb.module';
 
 @Component({
   standalone: true,
-  imports: [ZardBreadcrumbModule],
+  imports: [LucideAngularModule, ZardBreadcrumbModule],
   template: `
     <z-breadcrumb>
       <z-breadcrumb-list zWrap="wrap" zAlign="start">
         <z-breadcrumb-item>
           <z-breadcrumb-link zLink="/">
-            <div class="icon-house"></div>
+            <i-lucide [img]="HouseIcon" class="w-4 h-4" />
             Home
           </z-breadcrumb-link>
         </z-breadcrumb-item>
         <z-breadcrumb-separator />
         <z-breadcrumb-item>
           <z-breadcrumb-link zLink="/components">
-            <div class="icon-puzzle"></div>
+            <i-lucide [img]="PuzzleIcon" class="w-4 h-4" />
             Components
           </z-breadcrumb-link>
         </z-breadcrumb-item>
         <z-breadcrumb-separator />
         <z-breadcrumb-item>
           <z-breadcrumb-page>
-            <div class="icon-square-library"></div>
+            <i-lucide [img]="SquareLibraryIcon" class="w-4 h-4" />
             Breadcrumb
           </z-breadcrumb-page>
         </z-breadcrumb-item>
@@ -33,6 +34,10 @@ import { ZardBreadcrumbModule } from '../breadcrumb.module';
     </z-breadcrumb>
   `,
 })
-export class ZardDemoBreadcrumbWithAnIconComponent {}
+export class ZardDemoBreadcrumbWithAnIconComponent {
+  protected readonly HouseIcon = HouseIcon;
+  protected readonly PuzzleIcon = PuzzleIcon;
+  protected readonly SquareLibraryIcon = SquareLibraryIcon;
+}
 
 ```
