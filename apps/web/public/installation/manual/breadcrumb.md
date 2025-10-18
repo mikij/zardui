@@ -4,6 +4,7 @@
 import { ChangeDetectionStrategy, Component, computed, input, TemplateRef, ViewEncapsulation } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { ClassValue } from 'clsx';
+import { ChevronRightIcon, EllipsisIcon, LucideAngularModule } from 'lucide-angular';
 
 import {
   breadcrumbVariants,
@@ -127,10 +128,11 @@ export class ZardBreadcrumbPageComponent {
   exportAs: 'zBreadcrumbSeparator',
   changeDetection: ChangeDetectionStrategy.OnPush,
   encapsulation: ViewEncapsulation.None,
+  imports: [LucideAngularModule],
   template: `
     <li aria-hidden="true" role="presentation" [class]="classes()">
       <ng-content>
-        <div class="icon-chevron-right"></div>
+        <i-lucide [img]="ChevronRightIcon" class="w-4 h-4" />
       </ng-content>
     </li>
   `,
@@ -141,6 +143,8 @@ export class ZardBreadcrumbSeparatorComponent {
 
   readonly class = input<ClassValue>('');
 
+  protected readonly ChevronRightIcon = ChevronRightIcon;
+
   protected readonly classes = computed(() => mergeClasses(breadcrumbSeparatorVariants({ zType: this.zType() }), this.class()));
 }
 
@@ -149,7 +153,8 @@ export class ZardBreadcrumbSeparatorComponent {
   exportAs: 'zBreadcrumbEllipsis',
   changeDetection: ChangeDetectionStrategy.OnPush,
   encapsulation: ViewEncapsulation.None,
-  template: ` <span aria-hidden="true" role="presentation" class="icon-ellipsis"></span> `,
+  imports: [LucideAngularModule],
+  template: ` <span-lucide [img]="EllipsisIcon" aria-hidden="true" role="presentation" class="w-4 h-4"></span-lucide> `,
   host: {
     '[class]': 'classes()',
   },
@@ -159,6 +164,8 @@ export class ZardBreadcrumbEllipsisComponent {
 
   readonly class = input<ClassValue>('');
   protected readonly classes = computed(() => mergeClasses(breadcrumbEllipsisVariants({ zColor: this.zColor() }), this.class()));
+
+  protected readonly EllipsisIcon = EllipsisIcon;
 }
 
 ```

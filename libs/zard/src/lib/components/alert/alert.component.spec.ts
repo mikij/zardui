@@ -40,8 +40,7 @@ describe('ZardAlertComponent', () => {
   });
 
   it('should render correct icon based on zType', () => {
-    const infoIcon = InfoIcon;
     const icon = fixture.debugElement.query(By.directive(LucideAngularComponent)).componentInstance;
-    expect(icon.img).toEqual(infoIcon);
+    expect(icon.img).toEqual(InfoIcon);
   });
 });

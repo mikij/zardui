@@ -1,5 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { Component, TemplateRef, ViewChild } from '@angular/core';
+import { Component } from '@angular/core';
 import { RouterTestingModule } from '@angular/router/testing';
 
 import { By } from '@angular/platform-browser';
@@ -13,6 +13,7 @@ import {
   ZardBreadcrumbSeparatorComponent,
   ZardBreadcrumbEllipsisComponent,
 } from './breadcrumb.component';
+import { EllipsisIcon, LucideAngularComponent } from 'lucide-angular';
 
 @Component({
   selector: 'test-host-component',
@@ -162,10 +163,9 @@ describe('BreadcrumbComponents Integration', () => {
     expect(span.getAttribute('aria-current')).toBe('page');
   });
 
-  it('breadcrumb-ellipsis should contain the icon class', () => {
-    const breadcrumbPageDebug = fixture.debugElement.query(By.directive(ZardBreadcrumbEllipsisComponent));
-    const span = breadcrumbPageDebug.nativeElement.querySelector('span');
-    expect(span.classList).toContain('icon-ellipsis');
+  it('breadcrumb-ellipsis should contain the ellipsis icon', () => {
+    const iconComponent = fixture.debugElement.query(By.directive(LucideAngularComponent)).componentInstance;
+    expect(iconComponent.img).toEqual(EllipsisIcon);
   });
 
   it('should render the correct routerLink and projected content', () => {
