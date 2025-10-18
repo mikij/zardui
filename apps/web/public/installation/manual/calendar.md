@@ -4,6 +4,7 @@
 import { ChangeDetectionStrategy, Component, computed, ElementRef, input, linkedSignal, model, signal, viewChild, ViewEncapsulation } from '@angular/core';
 import { outputFromObservable, outputToObservable } from '@angular/core/rxjs-interop';
 import { filter } from 'rxjs';
+import { ChevronLeftIcon, ChevronRightIcon, LucideAngularModule } from 'lucide-angular';
 
 import { calendarDayButtonVariants, calendarDayVariants, calendarNavVariants, calendarVariants, calendarWeekdayVariants, ZardCalendarVariants } from './calendar.variants';
 import { ZardSelectItemComponent } from '../select/select-item.component';
@@ -29,7 +30,7 @@ export type { ZardCalendarVariants };
   standalone: true,
   changeDetection: ChangeDetectionStrategy.OnPush,
   encapsulation: ViewEncapsulation.None,
-  imports: [ZardButtonComponent, ZardSelectComponent, ZardSelectItemComponent],
+  imports: [LucideAngularModule, ZardButtonComponent, ZardSelectComponent, ZardSelectItemComponent],
   host: {
     '(keydown)': 'onKeyDown($event)',
     '[attr.tabindex]': '0',
@@ -49,7 +50,7 @@ export type { ZardCalendarVariants };
           aria-label="Previous month"
           [class]="navButtonClasses()"
         >
-          <i class="icon-chevron-left"></i>
+          <i-lucide [img]="ChevronLeftIcon" />
         </button>
 
         <!-- Month and Year Selectors -->
@@ -70,7 +71,7 @@ export type { ZardCalendarVariants };
         </div>
 
         <button z-button zType="ghost" [zSize]="navButtonSize()" (click)="nextMonth()" [disabled]="isNextDisabled()" aria-label="Next month" [class]="navButtonClasses()">
-          <i class="icon-chevron-right"></i>
+          <i-lucide [img]="ChevronRightIcon" />
         </button>
       </div>
 
@@ -132,6 +133,9 @@ export class ZardCalendarComponent {
 
   readonly weekdays = ['Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa'];
   readonly months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+
+  protected readonly ChevronLeftIcon = ChevronLeftIcon;
+  protected readonly ChevronRightIcon = ChevronRightIcon;
 
   protected readonly classes = computed(() =>
     mergeClasses(
