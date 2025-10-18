@@ -3,6 +3,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 
 import { ZardAlertComponent } from './alert.component';
+import { InfoIcon, LucideAngularComponent } from 'lucide-angular';
 
 @Component({
   selector: 'test-host-component',
@@ -39,7 +40,8 @@ describe('ZardAlertComponent', () => {
   });
 
   it('should render correct icon based on zType', () => {
-    const icon = fixture.debugElement.query(By.css('i'));
-    expect(icon.nativeElement.classList).toContain('icon-info');
+    const infoIcon = InfoIcon;
+    const icon = fixture.debugElement.query(By.directive(LucideAngularComponent)).componentInstance;
+    expect(icon.img).toEqual(infoIcon);
   });
 });

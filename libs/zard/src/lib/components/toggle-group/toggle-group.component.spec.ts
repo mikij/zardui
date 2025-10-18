@@ -2,7 +2,8 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 
 import { ZardToggleGroupComponent, ZardToggleGroupItem } from './toggle-group.component';
-import { BoldIcon, ItalicIcon } from 'lucide-angular';
+import { BoldIcon, ItalicIcon, LucideAngularComponent } from 'lucide-angular';
+import { By } from '@angular/platform-browser';
 
 describe('ZardToggleGroupComponent', () => {
   let component: ZardToggleGroupComponent;
@@ -152,17 +153,19 @@ describe('ZardToggleGroupComponent', () => {
   });
 
   it('should render icons when provided', () => {
+    const boldIcon = BoldIcon;
+    const italicIcon = ItalicIcon;
     const itemsWithIcons: ZardToggleGroupItem[] = [
-      { value: 'bold', icon: BoldIcon, ariaLabel: 'Toggle bold' },
-      { value: 'italic', icon: ItalicIcon, ariaLabel: 'Toggle italic' },
+      { value: 'bold', icon: boldIcon, ariaLabel: 'Toggle bold' },
+      { value: 'italic', icon: italicIcon, ariaLabel: 'Toggle italic' },
     ];
 
     fixture.componentRef.setInput('items', itemsWithIcons);
     fixture.detectChanges();
 
-    const buttons = fixture.nativeElement.querySelectorAll('button') as HTMLButtonElement[];
-    expect(buttons.length).toBe(2);
-    buttons.forEach(button => expect(button.querySelector('.lucide')).toBeTruthy());
+    const buttons = fixture.debugElement.queryAll(By.directive(LucideAngularComponent));
+    expect(buttons[0].injector.get(LucideAngularComponent).img).toEqual(boldIcon);
+    expect(buttons[1].injector.get(LucideAngularComponent).img).toEqual(italicIcon);
   });
 
   it('should render both icon and label when provided', () => {

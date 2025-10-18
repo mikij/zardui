@@ -5,10 +5,10 @@ import { ClassValue } from 'clsx';
 
 import { ChangeDetectionStrategy, Component, computed, forwardRef, input, output, signal, ViewEncapsulation } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
-import { LucideAngularModule, LucideIconData } from 'lucide-angular';
 
 import { mergeClasses } from '../../shared/utils/utils';
 import { toggleGroupVariants, toggleGroupItemVariants } from './toggle-group.variants';
+import { LucideAngularModule, LucideIconData } from 'lucide-angular';
 
 export interface ZardToggleGroupItem {
   value: string;

@@ -1,5 +1,6 @@
 ```angular-ts showLineNumbers copyButton
 import { Component } from '@angular/core';
+import { CodeXmlIcon } from 'lucide-angular';
 
 import { ZardAlertComponent } from '../alert.component';
 
@@ -9,7 +10,7 @@ import { ZardAlertComponent } from '../alert.component';
   template: ` <z-alert [zIcon]="icon" [zTitle]="title" [zDescription]="description" /> `,
 })
 export class ZardDemoAlertBasicComponent {
-  icon = 'icon-code-xml';
+  icon = CodeXmlIcon;
   title = 'Hello World!';
   description = 'Lorem ipsum dolor sit, amet consectetur adipisicing elit. Assumenda, sint.';
 }

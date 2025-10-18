@@ -1,5 +1,6 @@
 import { ChangeDetectionStrategy, Component, computed, input, ViewEncapsulation } from '@angular/core';
 import type { ClassValue } from 'clsx';
+import { CircleCheckIcon, CircleXIcon, InfoIcon, LucideAngularModule, LucideIconData, TriangleAlertIcon } from 'lucide-angular';
 
 import { mergeClasses } from '../../shared/utils/utils';
 import { alertVariants, ZardAlertVariants } from './alert.variants';
@@ -10,13 +11,14 @@ import { alertVariants, ZardAlertVariants } from './alert.variants';
   exportAs: 'zAlert',
   changeDetection: ChangeDetectionStrategy.OnPush,
   encapsulation: ViewEncapsulation.None,
+  imports: [LucideAngularModule],
   template: `
     @if (iconName()) {
-      <i [class]="iconName()"></i>
+      <i-lucide [name]="zIcon()" [img]="iconName()" class="w-4 h-4" />
     }
 
     <div class="flex flex-col gap-1 w-full">
-      <h5 class="font-medium leading-none tracking-tight mt-1">{{ zTitle() }}</h5>
+      <h5 class="font-medium leading-none tracking-tight">{{ zTitle() }}</h5>
       <span class="text-sm leading-[1.625]">{{ zDescription() }}</span>
     </div>
   `,
@@ -30,18 +32,18 @@ export class ZardAlertComponent {
   readonly class = input<ClassValue>('');
   readonly zTitle = input.required<string>();
   readonly zDescription = input.required<string>();
-  readonly zIcon = input<string>();
+  readonly zIcon = input<LucideIconData | undefined>();
   readonly zType = input<ZardAlertVariants['zType']>('default');
   readonly zAppearance = input<ZardAlertVariants['zAppearance']>('outline');
 
   protected readonly classes = computed(() => mergeClasses(alertVariants({ zType: this.zType(), zAppearance: this.zAppearance() }), this.class()));
 
-  protected readonly iconsType: Record<NonNullable<ZardAlertVariants['zType']>, string> = {
-    default: '',
-    info: 'icon-info',
-    success: 'icon-circle-check',
-    warning: 'icon-triangle-alert',
-    error: 'icon-circle-x',
+  protected readonly iconsType: Record<NonNullable<ZardAlertVariants['zType']>, LucideIconData | undefined> = {
+    default: undefined,
+    info: InfoIcon,
+    success: CircleCheckIcon,
+    warning: TriangleAlertIcon,
+    error: CircleXIcon,
   };
 
   protected readonly iconName = computed(() => {
