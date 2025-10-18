@@ -1,6 +1,7 @@
 import type { ClassValue } from 'clsx';
 
-import { ChangeDetectionStrategy, Component, computed, ElementRef, inject, input, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, input, ViewEncapsulation } from '@angular/core';
+import { LoaderCircleIcon, LucideAngularModule } from 'lucide-angular';
 
 import { mergeClasses, transform } from '../../shared/utils/utils';
 import { buttonVariants, ZardButtonVariants } from './button.variants';
@@ -11,9 +12,10 @@ import { buttonVariants, ZardButtonVariants } from './button.variants';
   standalone: true,
   changeDetection: ChangeDetectionStrategy.OnPush,
   encapsulation: ViewEncapsulation.None,
+  imports: [LucideAngularModule],
   template: `
     @if (zLoading()) {
-      <span zType="cached" class="icon-loader-circle animate-spin"></span>
+      <i-lucide [img]="LoaderCircleIcon" class="w-4 h-4 animate-spin duration-2000" />
     }
 
     <ng-content></ng-content>
@@ -23,8 +25,6 @@ import { buttonVariants, ZardButtonVariants } from './button.variants';
   },
 })
 export class ZardButtonComponent {
-  private readonly elementRef = inject(ElementRef);
-
   readonly zType = input<ZardButtonVariants['zType']>('default');
   readonly zSize = input<ZardButtonVariants['zSize']>('default');
   readonly zShape = input<ZardButtonVariants['zShape']>('default');
@@ -33,6 +33,8 @@ export class ZardButtonComponent {
 
   readonly zFull = input(false, { transform });
   readonly zLoading = input(false, { transform });
+
+  protected readonly LoaderCircleIcon = LoaderCircleIcon;
 
   protected readonly classes = computed(() =>
     mergeClasses(
