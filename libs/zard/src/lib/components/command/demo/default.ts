@@ -1,11 +1,12 @@
 import { Component, HostListener } from '@angular/core';
+import { FolderIcon, FolderOpenIcon, FolderPlusIcon, LayoutDashboardIcon, LucideAngularModule, MoonIcon, SaveIcon, TerminalIcon } from 'lucide-angular';
 
 import { ZardCommandModule } from '../command.module';
 import { ZardCommandOption } from '../command.component';
 
 @Component({
   standalone: true,
-  imports: [ZardCommandModule],
+  imports: [LucideAngularModule, ZardCommandModule],
   template: `
     <z-command class="md:min-w-[500px]" (zOnSelect)="handleCommand($event)">
       <z-command-input placeholder="Search actions, files, and more..."></z-command-input>
@@ -13,29 +14,37 @@ import { ZardCommandOption } from '../command.component';
         <z-command-empty>No commands found.</z-command-empty>
 
         <z-command-option-group zLabel="Quick Actions">
-          <z-command-option zLabel="Create new project" zValue="new-project" zIcon='<div class="icon-folder-plus"></div>' zShortcut="⌘N"> </z-command-option>
-          <z-command-option zLabel="Open file" zValue="open-file" zIcon='<div class="icon-folder-open"></div>' zShortcut="⌘O"> </z-command-option>
-          <z-command-option zLabel="Save all" zValue="save-all" zIcon='<div class="icon-save"></div>' zShortcut="⌘S"> </z-command-option>
+          <z-command-option zLabel="Create new project" zValue="new-project" [zIcon]="FolderPlusIcon" zShortcut="⌘N"> </z-command-option>
+          <z-command-option zLabel="Open file" zValue="open-file" [zIcon]="FolderOpenIcon" zShortcut="⌘O"> </z-command-option>
+          <z-command-option zLabel="Save all" zValue="save-all" [zIcon]="SaveIcon" zShortcut="⌘S"> </z-command-option>
         </z-command-option-group>
 
         <z-command-divider></z-command-divider>
 
         <z-command-option-group zLabel="Navigation">
-          <z-command-option zLabel="Go to Dashboard" zValue="dashboard" zIcon='<div class="icon-layout-dashboard"></div>' zShortcut="⌘1"> </z-command-option>
-          <z-command-option zLabel="Go to Projects" zValue="projects" zIcon='<div class="icon-folder"></div>' zShortcut="⌘2"> </z-command-option>
+          <z-command-option zLabel="Go to Dashboard" zValue="dashboard" [zIcon]="LayoutDashboardIcon" zShortcut="⌘1"> </z-command-option>
+          <z-command-option zLabel="Go to Projects" zValue="projects" [zIcon]="FolderIcon" zShortcut="⌘2"> </z-command-option>
         </z-command-option-group>
 
         <z-command-divider></z-command-divider>
 
         <z-command-option-group zLabel="Tools">
-          <z-command-option zLabel="Open terminal" zValue="terminal" zIcon='<div class="icon-terminal"></div>' zShortcut="⌘T"> </z-command-option>
-          <z-command-option zLabel="Toggle theme" zValue="theme" zIcon='<div class="icon-moon"></div>' zShortcut="⌘D"> </z-command-option>
+          <z-command-option zLabel="Open terminal" zValue="terminal" [zIcon]="TerminalIcon" zShortcut="⌘T"> </z-command-option>
+          <z-command-option zLabel="Toggle theme" zValue="theme" [zIcon]="MoonIcon" zShortcut="⌘D"> </z-command-option>
         </z-command-option-group>
       </z-command-list>
     </z-command>
   `,
 })
 export class ZardDemoCommandDefaultComponent {
+  protected readonly FolderPlusIcon = FolderPlusIcon;
+  protected readonly FolderOpenIcon = FolderOpenIcon;
+  protected readonly SaveIcon = SaveIcon;
+  protected readonly LayoutDashboardIcon = LayoutDashboardIcon;
+  protected readonly FolderIcon = FolderIcon;
+  protected readonly TerminalIcon = TerminalIcon;
+  protected readonly MoonIcon = MoonIcon;
+
   // Handle command selection
   handleCommand(option: ZardCommandOption) {
     const action = `Executed "${option.label}" (value: ${option.value})`;

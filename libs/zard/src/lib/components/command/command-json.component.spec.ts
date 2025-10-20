@@ -4,6 +4,7 @@ import { By } from '@angular/platform-browser';
 
 import { ZardCommandJsonComponent } from './command-json.component';
 import { ZardCommandConfig, ZardCommandOption } from './command.component';
+import { FilePlusIcon, FolderOpenIcon, LucideAngularComponent, TerminalIcon } from 'lucide-angular';
 
 @Component({
   selector: 'test-host-component',
@@ -27,7 +28,7 @@ class TestHostComponent {
           {
             label: 'New File',
             value: 'new',
-            icon: '<div class="icon-file-plus"></div>',
+            icon: FilePlusIcon,
             shortcut: '⌘N',
             key: 'n',
             action: () => {
@@ -37,7 +38,7 @@ class TestHostComponent {
           {
             label: 'Open File',
             value: 'open',
-            icon: '<div class="icon-folder-open"></div>',
+            icon: FolderOpenIcon,
             shortcut: '⌘O',
             key: 'o',
           },
@@ -55,7 +56,7 @@ class TestHostComponent {
           {
             label: 'Terminal',
             value: 'terminal',
-            icon: '<div class="icon-terminal"></div>',
+            icon: TerminalIcon,
             key: 't',
           },
           {
@@ -115,8 +116,9 @@ describe('ZardCommandJsonComponent', () => {
 
   it('should render icons and shortcuts', () => {
     const firstOption = fixture.nativeElement.querySelector('z-command-option');
-    expect(firstOption.innerHTML).toContain('icon-file-plus');
     expect(firstOption.textContent).toContain('⌘N');
+    const firstOptionIconComponent = fixture.debugElement.query(By.css('z-command-option>div>i-lucide')).componentInstance;
+    expect(firstOptionIconComponent.img).toEqual(FilePlusIcon);
   });
 
   it('should filter options based on search', async () => {

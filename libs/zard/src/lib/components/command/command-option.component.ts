@@ -1,4 +1,5 @@
 import { ChangeDetectionStrategy, Component, computed, ElementRef, inject, input, signal, ViewEncapsulation } from '@angular/core';
+import { LucideAngularModule, LucideIconData } from 'lucide-angular';
 
 import { mergeClasses, transform } from '../../shared/utils/utils';
 import { ZardCommandComponent } from './command.component';
@@ -12,6 +13,7 @@ import type { ClassValue } from 'clsx';
   standalone: true,
   changeDetection: ChangeDetectionStrategy.OnPush,
   encapsulation: ViewEncapsulation.None,
+  imports: [LucideAngularModule],
   template: `
     @if (shouldShow()) {
       <div
@@ -26,7 +28,7 @@ import type { ClassValue } from 'clsx';
         (mouseenter)="onMouseEnter()"
       >
         @if (zIcon()) {
-          <div class="mr-2 shrink-0 flex items-center justify-center w-4 h-4" [innerHTML]="zIcon()"></div>
+          <i-lucide [img]="zIcon()" class="mr-2 shrink-0 w-4 h-4" />
         }
         <span class="flex-1">{{ zLabel() }}</span>
         @if (zShortcut()) {
@@ -42,7 +44,7 @@ export class ZardCommandOptionComponent {
 
   readonly zValue = input.required<unknown>();
   readonly zLabel = input.required<string>();
-  readonly zIcon = input<string>('');
+  readonly zIcon = input<LucideIconData | undefined>();
   readonly zCommand = input<string>('');
   readonly zShortcut = input<string>('');
   readonly zDisabled = input(false, { transform });

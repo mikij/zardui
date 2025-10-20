@@ -24,6 +24,7 @@ import { ZardCommandOptionComponent } from './command-option.component';
 import { commandVariants, ZardCommandVariants } from './command.variants';
 
 import type { ClassValue } from 'clsx';
+import { LucideIconData } from 'lucide-angular';
 
 export interface ZardCommandOption {
   value: unknown;
@@ -31,7 +32,7 @@ export interface ZardCommandOption {
   disabled?: boolean;
   command?: string;
   shortcut?: string;
-  icon?: string;
+  icon?: LucideIconData;
   action?: () => void;
   key?: string; // Keyboard shortcut key (e.g., 'n' for Ctrl+N)
 }
@@ -458,6 +459,7 @@ import {
   ViewEncapsulation,
 } from '@angular/core';
 import { ControlValueAccessor, FormsModule, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { LucideAngularModule, SearchIcon } from 'lucide-angular';
 
 import { mergeClasses } from '../../shared/utils/utils';
 import { ZardCommandJsonComponent } from './command-json.component';
@@ -465,16 +467,17 @@ import { ZardCommandComponent } from './command.component';
 import { commandInputVariants } from './command.variants';
 
 import type { ClassValue } from 'clsx';
+
 @Component({
   selector: 'z-command-input',
   exportAs: 'zCommandInput',
   standalone: true,
-  imports: [FormsModule],
+  imports: [FormsModule, LucideAngularModule],
   changeDetection: ChangeDetectionStrategy.OnPush,
   encapsulation: ViewEncapsulation.None,
   template: `
     <div class="flex items-center border-b px-3" cmdk-input-wrapper="">
-      <div class="icon-search mr-2 h-4 w-4 shrink-0 opacity-50 flex items-center justify-center"></div>
+      <i-lucide [img]="SearchIcon" class="mr-2 h-4 w-4 shrink-0 stroke-muted-foreground flex items-center justify-center" />
       <input
         #searchInput
         [class]="classes()"
@@ -515,6 +518,8 @@ export class ZardCommandInputComponent implements ControlValueAccessor, OnInit, 
   readonly searchTerm = signal('');
   private searchSubject = new Subject<string>();
   private destroy$ = new Subject<void>();
+
+  protected readonly SearchIcon = SearchIcon;
 
   protected readonly classes = computed(() => mergeClasses(commandInputVariants({}), this.class()));
 
@@ -654,9 +659,9 @@ import { commandVariants, ZardCommandVariants } from './command.variants';
       <div id="command-status" class="sr-only" aria-live="polite" aria-atomic="true">
         {{ statusMessage() }}
       </div>
-      <z-command-input [placeholder]="config().placeholder || 'Type a command or search...'" (input)="onSearch($any($event.target).value)"> </z-command-input>
+      <z-command-input [placeholder]="config().placeholder ?? 'Type a command or search...'" (input)="onSearch($any($event.target).value)"> </z-command-input>
       <z-command-list>
-        <z-command-empty>{{ config().emptyText || 'No results found.' }}</z-command-empty>
+        <z-command-empty>{{ config().emptyText ?? 'No results found.' }}</z-command-empty>
 
         @for (group of filteredGroups(); track group.label; let groupIndex = $index) {
           <z-command-option-group [zLabel]="group.label">
@@ -664,10 +669,10 @@ import { commandVariants, ZardCommandVariants } from './command.variants';
               <z-command-option
                 [zLabel]="option.label"
                 [zValue]="option.value"
-                [zIcon]="option.icon || ''"
-                [zShortcut]="option.shortcut || ''"
-                [zCommand]="option.command || ''"
-                [zDisabled]="option.disabled || false"
+                [zIcon]="option.icon"
+                [zShortcut]="option.shortcut ?? ''"
+                [zCommand]="option.command ?? ''"
+                [zDisabled]="option.disabled ?? false"
                 [class]="getOptionClasses(groupIndex, optionIndex)"
                 (click)="onOptionClick(option)"
               >
@@ -727,7 +732,7 @@ export class ZardCommandJsonComponent implements ControlValueAccessor {
         label: group.label,
         visibleOptions: group.options.filter(option => {
           const label = option.label.toLowerCase();
-          const command = option.command?.toLowerCase() || '';
+          const command = option.command?.toLowerCase() ?? '';
           const value = String(option.value).toLowerCase();
           return label.includes(searchTerm) || command.includes(searchTerm) || value.includes(searchTerm);
         }),
@@ -1006,6 +1011,7 @@ export class ZardCommandOptionGroupComponent implements AfterContentInit {
 
 ```angular-ts title="command-option.component.ts" expandable="true" expandableTitle="Expand" copyButton showLineNumbers
 import { ChangeDetectionStrategy, Component, computed, ElementRef, inject, input, signal, ViewEncapsulation } from '@angular/core';
+import { LucideAngularModule, LucideIconData } from 'lucide-angular';
 
 import { mergeClasses, transform } from '../../shared/utils/utils';
 import { ZardCommandComponent } from './command.component';
@@ -1019,6 +1025,7 @@ import type { ClassValue } from 'clsx';
   standalone: true,
   changeDetection: ChangeDetectionStrategy.OnPush,
   encapsulation: ViewEncapsulation.None,
+  imports: [LucideAngularModule],
   template: `
     @if (shouldShow()) {
       <div
@@ -1033,7 +1040,7 @@ import type { ClassValue } from 'clsx';
         (mouseenter)="onMouseEnter()"
       >
         @if (zIcon()) {
-          <div class="mr-2 shrink-0 flex items-center justify-center w-4 h-4" [innerHTML]="zIcon()"></div>
+          <i-lucide [img]="zIcon()" class="mr-2 shrink-0 w-4 h-4" />
         }
         <span class="flex-1">{{ zLabel() }}</span>
         @if (zShortcut()) {
@@ -1049,7 +1056,7 @@ export class ZardCommandOptionComponent {
 
   readonly zValue = input.required<unknown>();
   readonly zLabel = input.required<string>();
-  readonly zIcon = input<string>('');
+  readonly zIcon = input<LucideIconData | undefined>();
   readonly zCommand = input<string>('');
   readonly zShortcut = input<string>('');
   readonly zDisabled = input(false, { transform });

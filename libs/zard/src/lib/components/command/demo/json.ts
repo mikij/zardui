@@ -1,4 +1,5 @@
 import { Component, signal } from '@angular/core';
+import { FilePlusIcon, FolderOpenIcon, SaveIcon, SettingsIcon, TerminalIcon } from 'lucide-angular';
 
 import { ZardCommandConfig } from '../command.component';
 import { ZardCommandModule } from '../command.module';
@@ -29,7 +30,7 @@ export class ZardDemoCommandJsonComponent {
           {
             label: 'New File',
             value: 'new',
-            icon: '<div class="icon-file-plus"></div>',
+            icon: FilePlusIcon,
             shortcut: '⌘N',
             key: 'n', // Keyboard shortcut key
             action: () => {
@@ -40,7 +41,7 @@ export class ZardDemoCommandJsonComponent {
           {
             label: 'Open File',
             value: 'open',
-            icon: '<div class="icon-folder-open"></div>',
+            icon: FolderOpenIcon,
             shortcut: '⌘O',
             key: 'o',
             action: () => {
@@ -51,7 +52,7 @@ export class ZardDemoCommandJsonComponent {
           {
             label: 'Save File',
             value: 'save',
-            icon: '<div class="icon-save"></div>',
+            icon: SaveIcon,
             shortcut: '⌘S',
             key: 's',
             action: () => {
@@ -67,7 +68,7 @@ export class ZardDemoCommandJsonComponent {
           {
             label: 'Open Terminal',
             value: 'terminal',
-            icon: '<div class="icon-terminal"></div>',
+            icon: TerminalIcon,
             shortcut: '⌘T',
             key: 't',
             action: () => {
@@ -78,7 +79,7 @@ export class ZardDemoCommandJsonComponent {
           {
             label: 'Settings',
             value: 'settings',
-            icon: '<div class="icon-settings"></div>',
+            icon: SettingsIcon,
             action: () => {
               this.lastAction.set('Opening settings...');
               this.showNotification('⚙️ Settings opened!');

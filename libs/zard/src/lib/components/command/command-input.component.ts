@@ -17,6 +17,7 @@ import {
   ViewEncapsulation,
 } from '@angular/core';
 import { ControlValueAccessor, FormsModule, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { LucideAngularModule, SearchIcon } from 'lucide-angular';
 
 import { mergeClasses } from '../../shared/utils/utils';
 import { ZardCommandJsonComponent } from './command-json.component';
@@ -24,16 +25,17 @@ import { ZardCommandComponent } from './command.component';
 import { commandInputVariants } from './command.variants';
 
 import type { ClassValue } from 'clsx';
+
 @Component({
   selector: 'z-command-input',
   exportAs: 'zCommandInput',
   standalone: true,
-  imports: [FormsModule],
+  imports: [FormsModule, LucideAngularModule],
   changeDetection: ChangeDetectionStrategy.OnPush,
   encapsulation: ViewEncapsulation.None,
   template: `
     <div class="flex items-center border-b px-3" cmdk-input-wrapper="">
-      <div class="icon-search mr-2 h-4 w-4 shrink-0 opacity-50 flex items-center justify-center"></div>
+      <i-lucide [img]="SearchIcon" class="mr-2 h-4 w-4 shrink-0 stroke-muted-foreground flex items-center justify-center" />
       <input
         #searchInput
         [class]="classes()"
@@ -74,6 +76,8 @@ export class ZardCommandInputComponent implements ControlValueAccessor, OnInit, 
   readonly searchTerm = signal('');
   private searchSubject = new Subject<string>();
   private destroy$ = new Subject<void>();
+
+  protected readonly SearchIcon = SearchIcon;
 
   protected readonly classes = computed(() => mergeClasses(commandInputVariants({}), this.class()));
 

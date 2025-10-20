@@ -3,14 +3,16 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 
 import { ZardCommandOptionComponent } from './command-option.component';
+import { SearchIcon } from 'lucide-angular';
 
 @Component({
   selector: 'test-host-component',
   standalone: true,
   imports: [ZardCommandOptionComponent],
-  template: ` <z-command-option zLabel="Test Option" zValue="test-value" zShortcut="⌘K" zIcon="🔍" [zDisabled]="disabled" variant="default"> </z-command-option> `,
+  template: ` <z-command-option zLabel="Test Option" zValue="test-value" zShortcut="⌘K" [zIcon]="SearchIcon" [zDisabled]="disabled" variant="default"> </z-command-option> `,
 })
 class TestHostComponent {
+  SearchIcon = SearchIcon;
   disabled = false;
 }
 

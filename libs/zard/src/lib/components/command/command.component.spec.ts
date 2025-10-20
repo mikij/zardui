@@ -9,6 +9,7 @@ import { ZardCommandListComponent } from './command-list.component';
 import { ZardCommandOptionGroupComponent } from './command-option-group.component';
 import { ZardCommandOptionComponent } from './command-option.component';
 import { ZardCommandComponent } from './command.component';
+import { TestTubeIcon } from 'lucide-angular';
 
 @Component({
   selector: 'test-host-component',
@@ -28,7 +29,7 @@ import { ZardCommandComponent } from './command.component';
       <z-command-list>
         <z-command-empty>No results found.</z-command-empty>
         <z-command-option-group zLabel="Test Group">
-          <z-command-option zLabel="Test Option" zValue="test" zShortcut="⌘T" zIcon='<div class="icon-test"></div>'></z-command-option>
+          <z-command-option zLabel="Test Option" zValue="test" zShortcut="⌘T" [zIcon]="TestIcon" />
           <z-command-option zLabel="Disabled Option" zValue="disabled" [zDisabled]="true"></z-command-option>
           <z-command-option zLabel="Search Option" zValue="search" zCommand="search test"></z-command-option>
         </z-command-option-group>
@@ -41,6 +42,7 @@ import { ZardCommandComponent } from './command.component';
 class TestHostComponent {
   selectedOption: unknown = null;
   changedOption: unknown = null;
+  TestIcon = TestTubeIcon;
 
   onSelect(option: unknown) {
     this.selectedOption = option;
@@ -193,8 +195,9 @@ describe('ZardCommandComponent', () => {
 
   it('should render option with icon and shortcut', () => {
     const optionElement = fixture.nativeElement.querySelector('z-command-option');
-    expect(optionElement.innerHTML).toContain('icon-test');
     expect(optionElement.textContent).toContain('⌘T');
+    const optionElementIconComponent = fixture.debugElement.query(By.css('z-command-option>div>i-lucide')).componentInstance;
+    expect(optionElementIconComponent.img).toEqual(TestTubeIcon);
   });
 
   it('should hide groups when no matching options', fakeAsync(() => {

@@ -15,7 +15,7 @@ import {
   ViewEncapsulation,
 } from '@angular/core';
 import { ControlValueAccessor, FormsModule, NG_VALUE_ACCESSOR } from '@angular/forms';
-import { CheckIcon, ChevronsUpDownIcon, LucideAngularModule } from 'lucide-angular';
+import { CheckIcon, ChevronsUpDownIcon, LucideAngularModule, LucideIconData } from 'lucide-angular';
 
 import { mergeClasses } from '../../shared/utils/utils';
 import { ZardButtonComponent } from '../button/button.component';
@@ -33,7 +33,7 @@ export interface ZardComboboxOption {
   value: string;
   label: string;
   disabled?: boolean;
-  icon?: string;
+  icon?: LucideIconData;
 }
 
 export interface ZardComboboxGroup {
@@ -110,7 +110,7 @@ export interface ZardComboboxGroup {
                         [zValue]="option.value"
                         [zLabel]="option.label"
                         [zDisabled]="option.disabled || false"
-                        [zIcon]="option.icon || ''"
+                        [zIcon]="option.icon"
                         [attr.aria-selected]="option.value === getCurrentValue()"
                       >
                         {{ option.label }}
@@ -126,7 +126,7 @@ export interface ZardComboboxGroup {
                       [zValue]="option.value"
                       [zLabel]="option.label"
                       [zDisabled]="option.disabled || false"
-                      [zIcon]="option.icon || ''"
+                      [zIcon]="option.icon"
                       [attr.aria-selected]="option.value === getCurrentValue()"
                     >
                       {{ option.label }}
@@ -143,7 +143,7 @@ export interface ZardComboboxGroup {
                   [zValue]="option.value"
                   [zLabel]="option.label"
                   [zDisabled]="option.disabled || false"
-                  [zIcon]="option.icon || ''"
+                  [zIcon]="option.icon"
                   [attr.aria-selected]="option.value === getCurrentValue()"
                 >
                   {{ option.label }}

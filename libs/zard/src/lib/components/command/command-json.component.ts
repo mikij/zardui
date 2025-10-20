@@ -34,9 +34,9 @@ import { commandVariants, ZardCommandVariants } from './command.variants';
       <div id="command-status" class="sr-only" aria-live="polite" aria-atomic="true">
         {{ statusMessage() }}
       </div>
-      <z-command-input [placeholder]="config().placeholder || 'Type a command or search...'" (input)="onSearch($any($event.target).value)"> </z-command-input>
+      <z-command-input [placeholder]="config().placeholder ?? 'Type a command or search...'" (input)="onSearch($any($event.target).value)"> </z-command-input>
       <z-command-list>
-        <z-command-empty>{{ config().emptyText || 'No results found.' }}</z-command-empty>
+        <z-command-empty>{{ config().emptyText ?? 'No results found.' }}</z-command-empty>
 
         @for (group of filteredGroups(); track group.label; let groupIndex = $index) {
           <z-command-option-group [zLabel]="group.label">
@@ -44,10 +44,10 @@ import { commandVariants, ZardCommandVariants } from './command.variants';
               <z-command-option
                 [zLabel]="option.label"
                 [zValue]="option.value"
-                [zIcon]="option.icon || ''"
-                [zShortcut]="option.shortcut || ''"
-                [zCommand]="option.command || ''"
-                [zDisabled]="option.disabled || false"
+                [zIcon]="option.icon"
+                [zShortcut]="option.shortcut ?? ''"
+                [zCommand]="option.command ?? ''"
+                [zDisabled]="option.disabled ?? false"
                 [class]="getOptionClasses(groupIndex, optionIndex)"
                 (click)="onOptionClick(option)"
               >
@@ -107,7 +107,7 @@ export class ZardCommandJsonComponent implements ControlValueAccessor {
         label: group.label,
         visibleOptions: group.options.filter(option => {
           const label = option.label.toLowerCase();
-          const command = option.command?.toLowerCase() || '';
+          const command = option.command?.toLowerCase() ?? '';
           const value = String(option.value).toLowerCase();
           return label.includes(searchTerm) || command.includes(searchTerm) || value.includes(searchTerm);
         }),
