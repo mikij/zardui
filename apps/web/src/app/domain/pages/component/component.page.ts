@@ -1,15 +1,14 @@
-import { MarkdownRendererComponent } from '@zard/domain/components/render/markdown-renderer.component';
-import { ZardCodeBoxComponent } from '@zard/widget/components/zard-code-box/zard-code-box.component';
-import { NavigationConfig } from '@zard/domain/components/dynamic-anchor/dynamic-anchor.component';
-import { DynamicInstallationService } from '@zard/shared/services/dynamic-installation.service';
-import { DocHeadingComponent } from '@zard/domain/components/doc-heading/doc-heading.component';
-import { DocContentComponent } from '@zard/domain/components/doc-content/doc-content.component';
-import { ComponentData, COMPONENTS } from '@zard/shared/constants/components.constant';
-import { StepsComponent } from '@zard/domain/components/steps/steps.component';
-import { Step } from '@zard/shared/constants/install.constant';
+import { MarkdownRendererComponent } from '../../components/render/markdown-renderer.component';
+import { ZardCodeBoxComponent } from '../../../widget/components/zard-code-box/zard-code-box.component';
+import { NavigationConfig } from '../../components/dynamic-anchor/dynamic-anchor.component';
+import { DynamicInstallationService } from '../../../shared/services/dynamic-installation.service';
+import { DocContentComponent } from '../../components/doc-content/doc-content.component';
+import { ComponentData, COMPONENTS } from '../../../shared/constants/components.constant';
+import { StepsComponent } from '../../components/steps/steps.component';
+import { Step } from '../../../shared/constants/install.constant';
+import { SeoService } from '../../../shared/services/seo.service';
 import { Component, inject, signal } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Title } from '@angular/platform-browser';
 
 import { ScrollSpyItemDirective } from '../../directives/scroll-spy-item.directive';
 import { ScrollSpyDirective } from '../../directives/scroll-spy.directive';
@@ -21,7 +20,7 @@ import { ScrollSpyDirective } from '../../directives/scroll-spy.directive';
   imports: [DocContentComponent, StepsComponent, ZardCodeBoxComponent, ScrollSpyDirective, ScrollSpyItemDirective, MarkdownRendererComponent],
 })
 export class ComponentPage {
-  private readonly titleService = inject(Title);
+  private readonly seoService = inject(SeoService);
   private readonly activatedRoute = inject(ActivatedRoute);
   private readonly router = inject(Router);
   private readonly dynamicInstallationService = inject(DynamicInstallationService);
@@ -74,11 +73,11 @@ export class ComponentPage {
   }
 
   setPageTitle() {
-    const componentName = this.componentData?.componentName;
+    const { componentName, description } = this.componentData!;
+    const ogImage = `og-${componentName}.jpg`;
+
     if (componentName) {
-      const capitalizedText = componentName[0].toUpperCase() + componentName.slice(1);
-      const pageTitle = `${capitalizedText} - zard/ui`;
-      this.titleService.setTitle(pageTitle);
+      this.seoService.setComponentSeo(componentName, description, ogImage);
     }
   }
 }
