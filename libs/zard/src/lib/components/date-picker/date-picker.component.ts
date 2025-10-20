@@ -8,6 +8,7 @@ import { ZardPopoverComponent, ZardPopoverDirective } from '../popover/popover.c
 import { datePickerVariants, ZardDatePickerVariants } from './date-picker.variants';
 
 import type { ClassValue } from '../../shared/utils/utils';
+import { CalendarIcon, LucideAngularModule } from 'lucide-angular';
 
 export type { ZardDatePickerVariants };
 
@@ -17,7 +18,7 @@ export type { ZardDatePickerVariants };
   standalone: true,
   changeDetection: ChangeDetectionStrategy.OnPush,
   encapsulation: ViewEncapsulation.None,
-  imports: [ZardButtonComponent, ZardCalendarComponent, ZardPopoverComponent, ZardPopoverDirective],
+  imports: [LucideAngularModule, ZardButtonComponent, ZardCalendarComponent, ZardPopoverComponent, ZardPopoverDirective],
   host: {},
   template: `
     <button
@@ -35,7 +36,7 @@ export type { ZardDatePickerVariants };
       [attr.aria-haspopup]="true"
       aria-label="Choose date"
     >
-      <i class="icon-calendar"></i>
+      <i-lucide [img]="CalendarIcon" />
       <span [class]="textClasses()">
         {{ displayText() }}
       </span>
@@ -67,6 +68,8 @@ export class ZardDatePickerComponent {
   readonly disabled = input<boolean>(false);
 
   readonly dateChange = output<Date | null>();
+
+  protected readonly CalendarIcon = CalendarIcon;
 
   protected readonly classes = computed(() =>
     mergeClasses(
