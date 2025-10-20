@@ -3,6 +3,7 @@
 ```angular-ts title="checkbox.component.ts" expandable="true" expandableTitle="Expand" copyButton showLineNumbers
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, computed, forwardRef, inject, input, output, ViewEncapsulation } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { CheckIcon, LucideAngularModule } from 'lucide-angular';
 
 import { mergeClasses, transform } from '../../shared/utils/utils';
 import { checkboxLabelVariants, checkboxVariants, ZardCheckboxVariants } from './checkbox.variants';
@@ -16,15 +17,18 @@ type OnChangeType = (value: any) => void;
   selector: 'z-checkbox, [z-checkbox]',
   standalone: true,
   exportAs: 'zCheckbox',
+  imports: [LucideAngularModule],
   template: `
-    <span class="flex items-center gap-2" [class]="disabled() ? 'cursor-not-allowed' : 'cursor-pointer'" (click)="onCheckboxChange()">
+    <span class="flex items-center gap-2 cursor-pointer" (click)="onCheckboxChange()" (keyup)="onCheckboxChange()" tabindex="0">
       <main class="flex relative">
         <input #input type="checkbox" [class]="classes()" [checked]="checked" [disabled]="disabled()" (blur)="onCheckboxBlur()" name="checkbox" />
-        <i
-          class="icon-check absolute flex items-center justify-center text-primary-foreground opacity-0 peer-checked:opacity-100 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none"
-        ></i>
+        <i-lucide
+          [img]="CheckIcon"
+          class="h-4 w-4 absolute flex items-center justify-center text-primary-foreground peer-checked:opacity-100 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none"
+          [class.opacity-0]="!checked"
+        ></i-lucide>
       </main>
-      <label [class]="labelClasses()" for="checkbox">
+      <label [class]="labelClasses()" for="checkbox" [class.cursor-not-allowed]="disabled()">
         <ng-content></ng-content>
       </label>
     </span>
@@ -52,6 +56,8 @@ export class ZardCheckboxComponent implements ControlValueAccessor {
   private onChange: OnChangeType = () => {};
   /* eslint-disable-next-line @typescript-eslint/no-empty-function */
   private onTouched: OnTouchedType = () => {};
+
+  protected readonly CheckIcon = CheckIcon;
 
   protected readonly classes = computed(() => mergeClasses(checkboxVariants({ zType: this.zType(), zSize: this.zSize(), zShape: this.zShape() }), this.class()));
   protected readonly labelClasses = computed(() => mergeClasses(checkboxLabelVariants({ zSize: this.zSize() })));
