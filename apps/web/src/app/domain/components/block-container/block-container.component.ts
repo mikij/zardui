@@ -2,6 +2,7 @@ import { ZardToggleGroupComponent } from '@zard/components/toggle-group/toggle-g
 import { ZardSegmentedComponent } from '@zard/components/segmented/segmented.component';
 import { ZardDividerComponent } from '@zard/components/divider/divider.component';
 import { Component, input, signal } from '@angular/core';
+import { MonitorIcon, SmartphoneIcon, TabletIcon } from 'lucide-angular';
 
 import { BlockCodeViewerComponent } from '../block-code-viewer/block-code-viewer.component';
 import { BlockPreviewComponent } from '../block-preview/block-preview.component';
@@ -52,9 +53,9 @@ export class BlockContainerComponent {
   ];
 
   protected readonly viewportOptions = [
-    { value: 'desktop', ariaLabel: 'Desktop view', icon: 'icon-monitor' },
-    { value: 'tablet', ariaLabel: 'Tablet view', icon: 'icon-tablet' },
-    { value: 'mobile', ariaLabel: 'Mobile view', icon: 'icon-smartphone' },
+    { value: 'desktop', ariaLabel: 'Desktop view', icon: MonitorIcon },
+    { value: 'tablet', ariaLabel: 'Tablet view', icon: TabletIcon },
+    { value: 'mobile', ariaLabel: 'Mobile view', icon: SmartphoneIcon },
   ];
 
   protected onTabChange(value: string): void {
