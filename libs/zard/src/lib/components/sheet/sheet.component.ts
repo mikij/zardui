@@ -21,11 +21,12 @@ import { mergeClasses } from '../../shared/utils/utils';
 import { ZardButtonComponent } from '../button/button.component';
 import { ZardSheetRef } from './sheet-ref';
 import { sheetVariants, ZardSheetVariants } from './sheet.variants';
+import { LucideAngularModule, LucideIconData, XIcon } from 'lucide-angular';
 
 const noopFun = () => void 0;
 export type OnClickCallback<T> = (instance: T) => false | void | object;
 export class ZardSheetOptions<T, U> {
-  zCancelIcon?: string;
+  zCancelIcon?: LucideIconData;
   zCancelText?: string | null;
   zClosable?: boolean;
   zContent?: string | TemplateRef<T> | Type<T>;
@@ -37,7 +38,7 @@ export class ZardSheetOptions<T, U> {
   zMaskClosable?: boolean;
   zOkDestructive?: boolean;
   zOkDisabled?: boolean;
-  zOkIcon?: string;
+  zOkIcon?: LucideIconData;
   zOkText?: string | null;
   zOnCancel?: EventEmitter<T> | OnClickCallback<T> = noopFun;
   zOnOk?: EventEmitter<T> | OnClickCallback<T> = noopFun;
@@ -51,11 +52,11 @@ export class ZardSheetOptions<T, U> {
 @Component({
   selector: 'z-sheet',
   exportAs: 'zSheet',
-  imports: [OverlayModule, PortalModule, ZardButtonComponent],
+  imports: [LucideAngularModule, OverlayModule, PortalModule, ZardButtonComponent],
   template: `
     @if (config.zClosable || config.zClosable === undefined) {
       <button data-testid="z-close-header-button" z-button zType="ghost" zSize="sm" class="absolute right-1 top-1 cursor-pointer " (click)="onCloseClick()">
-        <i class="icon-x text-sm"></i>
+        <i-lucide [img]="XIcon" class="size-3" />
       </button>
     }
 
@@ -91,20 +92,20 @@ export class ZardSheetOptions<T, U> {
             (click)="onOkClick()"
           >
             @if (config.zOkIcon) {
-              <i class="icon-{{ config.zOkIcon }}"></i>
+              <i-lucide [img]="config.zOkIcon" class="size-4" />
             }
 
-            {{ config.zOkText || 'OK' }}
+            {{ config.zOkText ?? 'OK' }}
           </button>
         }
 
         @if (config.zCancelText !== null) {
           <button data-testid="z-cancel-button" class="cursor-pointer" z-button zType="outline" (click)="onCloseClick()">
             @if (config.zCancelIcon) {
-              <i class="icon-{{ config.zCancelIcon }}"></i>
+              <i-lucide [img]="config.zCancelIcon" class="size-4" />
             }
 
-            {{ config.zCancelText || 'Cancel' }}
+            {{ config.zCancelText ?? 'Cancel' }}
           </button>
         }
       </footer>
@@ -122,6 +123,8 @@ export class ZardSheetOptions<T, U> {
 export class ZardSheetComponent<T, U> extends BasePortalOutlet {
   private readonly host = inject(ElementRef<HTMLElement>);
   protected readonly config = inject(ZardSheetOptions<T, U>);
+
+  protected readonly XIcon = XIcon;
 
   protected readonly classes = computed(() => {
     const zSize = this.config.zWidth || this.config.zHeight ? 'custom' : this.config.zSize;
