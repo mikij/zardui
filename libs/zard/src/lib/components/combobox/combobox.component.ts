@@ -15,6 +15,7 @@ import {
   ViewEncapsulation,
 } from '@angular/core';
 import { ControlValueAccessor, FormsModule, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { CheckIcon, ChevronsUpDownIcon, LucideAngularModule } from 'lucide-angular';
 
 import { mergeClasses } from '../../shared/utils/utils';
 import { ZardButtonComponent } from '../button/button.component';
@@ -46,6 +47,7 @@ export interface ZardComboboxGroup {
   standalone: true,
   imports: [
     FormsModule,
+    LucideAngularModule,
     ZardButtonComponent,
     ZardCommandComponent,
     ZardCommandInputComponent,
@@ -82,7 +84,7 @@ export interface ZardComboboxGroup {
       <span class="flex-1 text-left truncate">
         {{ displayValue() || placeholder() }}
       </span>
-      <i [class]="iconClasses()"></i>
+      <i-lucide [img]="ChevronsUpDownIcon" [class]="iconClasses()" />
     </button>
 
     <ng-template #popoverContent>
@@ -113,7 +115,7 @@ export interface ZardComboboxGroup {
                       >
                         {{ option.label }}
                         @if (option.value === getCurrentValue()) {
-                          <i class="icon-check ml-auto h-4 w-4"></i>
+                          <i-lucide [img]="CheckIcon" class="ml-auto h-4 w-4" />
                         }
                       </z-command-option>
                     }
@@ -129,7 +131,7 @@ export interface ZardComboboxGroup {
                     >
                       {{ option.label }}
                       @if (option.value === getCurrentValue()) {
-                        <i class="icon-check ml-auto h-4 w-4"></i>
+                        <i-lucide [img]="CheckIcon" class="ml-auto h-4 w-4" />
                       }
                     </z-command-option>
                   }
@@ -146,7 +148,7 @@ export interface ZardComboboxGroup {
                 >
                   {{ option.label }}
                   @if (option.value === getCurrentValue()) {
-                    <i class="icon-check ml-auto h-4 w-4"></i>
+                    <i-lucide [img]="CheckIcon" class="ml-auto h-4 w-4" />
                   }
                 </z-command-option>
               }
@@ -202,9 +204,12 @@ export class ZardComboboxComponent implements ControlValueAccessor {
     ),
   );
 
+  protected readonly CheckIcon = CheckIcon;
+  protected readonly ChevronsUpDownIcon = ChevronsUpDownIcon;
+
   protected readonly buttonClasses = computed(() => 'w-full justify-between');
 
-  protected readonly iconClasses = computed(() => 'icon-chevrons-up-down ml-2 h-4 w-4 shrink-0 opacity-50');
+  protected readonly iconClasses = computed(() => 'ml-2 h-4 w-4 shrink-0 opacity-50');
 
   protected readonly popoverClasses = computed(() => {
     const widthClass = this.zWidth() === 'full' ? 'w-full' : 'w-[200px]';
