@@ -1,5 +1,20 @@
 ```angular-ts showLineNumbers copyButton
 import { Component, signal } from '@angular/core';
+import {
+  CalendarIcon,
+  ChevronRightIcon,
+  ChevronsUpDownIcon,
+  FolderIcon,
+  HouseIcon,
+  InboxIcon,
+  LogOutIcon,
+  LucideAngularModule,
+  LucideIconData,
+  PanelLeftIcon,
+  SearchIcon,
+  SettingsIcon,
+  UserIcon,
+} from 'lucide-angular';
 
 import { ZardAvatarComponent } from '../../avatar/avatar.component';
 import { ZardBreadcrumbModule } from '../../breadcrumb/breadcrumb.module';
@@ -11,7 +26,7 @@ import { ZardTooltipModule } from '../../tooltip/tooltip';
 import { LayoutModule } from '../layout.module';
 
 interface MenuItem {
-  icon: string;
+  icon: LucideIconData;
   label: string;
   submenu?: { label: string }[];
 }
@@ -19,7 +34,17 @@ interface MenuItem {
 @Component({
   selector: 'z-demo-layout-collapsible',
   standalone: true,
-  imports: [LayoutModule, ZardButtonComponent, ZardBreadcrumbModule, ZardMenuModule, ZardSkeletonComponent, ZardTooltipModule, ZardDividerComponent, ZardAvatarComponent],
+  imports: [
+    LayoutModule,
+    LucideAngularModule,
+    ZardButtonComponent,
+    ZardBreadcrumbModule,
+    ZardMenuModule,
+    ZardSkeletonComponent,
+    ZardTooltipModule,
+    ZardDividerComponent,
+    ZardAvatarComponent,
+  ],
   template: `
     <!-- border and rounded-md are just for the demo purpose -->
     <z-layout class="border rounded-md overflow-hidden">
@@ -31,7 +56,7 @@ interface MenuItem {
             }
             @for (item of mainMenuItems; track item.label) {
               <button z-button zType="ghost" [class]="sidebarCollapsed() ? 'justify-center' : 'justify-start'" [zTooltip]="sidebarCollapsed() ? item.label : ''" zPosition="right">
-                <i [class]="sidebarCollapsed() ? item.icon : item.icon + ' mr-2'"></i>
+                <i-lucide [img]="item.icon" class="w-4 h-4" [class.mr-2]="!sidebarCollapsed()" />
                 @if (!sidebarCollapsed()) {
                   <span>{{ item.label }}</span>
                 }
@@ -55,10 +80,10 @@ interface MenuItem {
                   [zTooltip]="sidebarCollapsed() ? item.label : null"
                   zPosition="right"
                 >
-                  <i [class]="sidebarCollapsed() ? item.icon : item.icon + ' mr-2'"></i>
+                  <i-lucide [img]="item.icon" class="w-4 h-4" [class.mr-2]="!sidebarCollapsed()" />
                   @if (!sidebarCollapsed()) {
                     <span class="flex-1 text-left">{{ item.label }}</span>
-                    <i class="icon-chevron-right"></i>
+                    <i-lucide [img]="ChevronRightIcon" class="w-4 h-4" />
                   }
                 </button>
 
@@ -77,7 +102,7 @@ interface MenuItem {
                   [zTooltip]="sidebarCollapsed() ? item.label : ''"
                   zPosition="right"
                 >
-                  <i [class]="sidebarCollapsed() ? item.icon : item.icon + ' mr-2'"></i>
+                  <i-lucide [img]="item.icon" class="w-4 h-4" [class.mr-2]="!sidebarCollapsed()" />
                   @if (!sidebarCollapsed()) {
                     <span>{{ item.label }}</span>
                   }
@@ -101,23 +126,23 @@ interface MenuItem {
                   <div class="text-xs">test&#64;zardui.com</div>
                 </div>
 
-                <i class="icon-chevrons-up-down ml-auto"></i>
+                <i-lucide [img]="ChevronsUpDownIcon" class="ml-auto w-4 h-4" />
               }
             </div>
 
             <ng-template #userMenu>
               <div z-menu-content class="w-48">
                 <button z-menu-item>
-                  <i class="icon-user mr-2"></i>
+                  <i-lucide [img]="UserIcon" class="mr-2 w-4 h-4" />
                   Profile
                 </button>
                 <button z-menu-item>
-                  <i class="icon-settings mr-2"></i>
+                  <i-lucide [img]="SettingsIcon" class="mr-2 w-4 h-4" />
                   Settings
                 </button>
                 <z-divider zSpacing="sm" />
                 <button z-menu-item>
-                  <i class="icon-log-out mr-2"></i>
+                  <i-lucide [img]="LogOutIcon" class="mr-2 w-4 h-4" />
                   Logout
                 </button>
               </div>
@@ -130,7 +155,7 @@ interface MenuItem {
       <z-content class="min-h-[200px]">
         <div class="flex items-center">
           <button z-button zType="ghost" zSize="sm" class="-ml-2" (click)="toggleSidebar()">
-            <i class="icon-panel-left"></i>
+            <i-lucide [img]="PanelLeftIcon" class="w-4 h-4" />
           </button>
 
           <z-divider zOrientation="vertical" class="h-4 ml-2" />
@@ -157,21 +182,28 @@ interface MenuItem {
   `,
 })
 export class LayoutDemoSidebarComponent {
+  protected readonly ChevronRightIcon = ChevronRightIcon;
+  protected readonly ChevronsUpDownIcon = ChevronsUpDownIcon;
+  protected readonly UserIcon = UserIcon;
+  protected readonly SettingsIcon = SettingsIcon;
+  protected readonly LogOutIcon = LogOutIcon;
+  protected readonly PanelLeftIcon = PanelLeftIcon;
+
   sidebarCollapsed = signal(false);
 
   mainMenuItems: MenuItem[] = [
-    { icon: 'icon-house', label: 'Home' },
-    { icon: 'icon-inbox', label: 'Inbox' },
+    { icon: HouseIcon, label: 'Home' },
+    { icon: InboxIcon, label: 'Inbox' },
   ];
 
   workspaceMenuItems: MenuItem[] = [
     {
-      icon: 'icon-folder',
+      icon: FolderIcon,
       label: 'Projects',
       submenu: [{ label: 'Design System' }, { label: 'Mobile App' }, { label: 'Website' }],
     },
-    { icon: 'icon-calendar', label: 'Calendar' },
-    { icon: 'icon-search', label: 'Search' },
+    { icon: CalendarIcon, label: 'Calendar' },
+    { icon: SearchIcon, label: 'Search' },
   ];
 
   avatar = {

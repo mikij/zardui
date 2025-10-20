@@ -3,6 +3,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 
 import { SidebarComponent, SidebarGroupComponent, SidebarGroupLabelComponent } from './sidebar.component';
+import { ChevronLeftIcon, ChevronRightIcon, LucideAngularComponent } from 'lucide-angular';
 
 describe('SidebarComponent', () => {
   let component: SidebarComponent;
@@ -104,8 +105,8 @@ describe('SidebarComponent', () => {
     fixture.componentRef.setInput('zCollapsible', true);
     fixture.detectChanges();
 
-    const iconElement = fixture.debugElement.query(By.css('i'));
-    expect(iconElement.nativeElement.classList.contains('icon-chevron-left')).toBeTruthy();
+    const iconComponent = fixture.debugElement.query(By.directive(LucideAngularComponent)).componentInstance;
+    expect(iconComponent.img).toBe(ChevronLeftIcon);
   });
 
   it('should display correct chevron icon when collapsed', () => {
@@ -113,8 +114,8 @@ describe('SidebarComponent', () => {
     fixture.componentRef.setInput('zCollapsed', true);
     fixture.detectChanges();
 
-    const iconElement = fixture.debugElement.query(By.css('i'));
-    expect(iconElement.nativeElement.classList.contains('icon-chevron-right')).toBeTruthy();
+    const iconComponent = fixture.debugElement.query(By.directive(LucideAngularComponent)).componentInstance;
+    expect(iconComponent.img).toBe(ChevronRightIcon);
   });
 
   it('should reverse chevron icon when zReverseArrow is true', () => {
@@ -122,8 +123,8 @@ describe('SidebarComponent', () => {
     fixture.componentRef.setInput('zReverseArrow', true);
     fixture.detectChanges();
 
-    const iconElement = fixture.debugElement.query(By.css('i'));
-    expect(iconElement.nativeElement.classList.contains('icon-chevron-right')).toBeTruthy();
+    const iconComponent = fixture.debugElement.query(By.directive(LucideAngularComponent)).componentInstance;
+    expect(iconComponent.img).toBe(ChevronRightIcon);
   });
 
   it('should emit zCollapsedChange when toggle is clicked', () => {

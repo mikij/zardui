@@ -5,12 +5,13 @@ import { ChangeDetectionStrategy, Component, computed, effect, input, output, si
 import { mergeClasses, transform } from '../../shared/utils/utils';
 import { ZardStringTemplateOutletDirective } from '../core/directives/string-template-outlet/string-template-outlet.directive';
 import { sidebarGroupLabelVariants, sidebarGroupVariants, sidebarTriggerVariants, sidebarVariants } from './layout.variants';
+import { ChevronLeftIcon, ChevronRightIcon, LucideAngularModule } from 'lucide-angular';
 
 @Component({
   selector: 'z-sidebar',
   exportAs: 'zSidebar',
   standalone: true,
-  imports: [ZardStringTemplateOutletDirective],
+  imports: [LucideAngularModule, ZardStringTemplateOutletDirective],
   changeDetection: ChangeDetectionStrategy.OnPush,
   encapsulation: ViewEncapsulation.None,
   template: `
@@ -30,7 +31,7 @@ import { sidebarGroupLabelVariants, sidebarGroupVariants, sidebarTriggerVariants
           [attr.aria-label]="zCollapsed() ? 'Expand sidebar' : 'Collapse sidebar'"
           [attr.aria-expanded]="!zCollapsed()"
         >
-          <i [class]="chevronIcon()"></i>
+          <i-lucide [img]="chevronIcon()" class="w-4 h-4 text-base" />
         </div>
       }
 
@@ -74,9 +75,9 @@ export class SidebarComponent {
     const reverse = this.zReverseArrow();
 
     if (reverse) {
-      return collapsed ? 'icon-chevron-left text-base' : 'icon-chevron-right text-base';
+      return collapsed ? ChevronLeftIcon : ChevronRightIcon;
     }
-    return collapsed ? 'icon-chevron-right text-base' : 'icon-chevron-left text-base';
+    return collapsed ? ChevronRightIcon : ChevronLeftIcon;
   });
 
   protected readonly classes = computed(() => mergeClasses(sidebarVariants(), this.class()));

@@ -8,12 +8,14 @@ import { FooterComponent } from '../footer.component';
 import { HeaderComponent } from '../header.component';
 import { LayoutComponent } from '../layout.component';
 import { SidebarComponent, SidebarGroupComponent, SidebarGroupLabelComponent } from '../sidebar.component';
+import { BellIcon, HouseIcon, LayersIcon, LucideAngularModule, SearchIcon, UsersIcon } from 'lucide-angular';
 
 @Component({
   selector: 'z-demo-layout-full',
   standalone: true,
   imports: [
     LayoutComponent,
+    LucideAngularModule,
     HeaderComponent,
     ContentComponent,
     FooterComponent,
@@ -33,10 +35,10 @@ import { SidebarComponent, SidebarGroupComponent, SidebarGroupLabelComponent } f
           </div>
           <div class="flex items-center gap-2">
             <button z-button zType="ghost" zSize="sm">
-              <i class="icon-search"></i>
+              <i-lucide [img]="SearchIcon" class="w-4 h-4" />
             </button>
             <button z-button zType="ghost" zSize="sm">
-              <i class="icon-bell"></i>
+              <i-lucide [img]="BellIcon" class="w-4 h-4" />
             </button>
           </div>
         </div>
@@ -48,15 +50,15 @@ import { SidebarComponent, SidebarGroupComponent, SidebarGroupLabelComponent } f
             <z-sidebar-group>
               <z-sidebar-group-label>Menu</z-sidebar-group-label>
               <button z-button zType="secondary" class="justify-start">
-                <i class="icon-house mr-2"></i>
+                <i-lucide [img]="HouseIcon" class="w-4 h-4 mr-2" />
                 Dashboard
               </button>
               <button z-button zType="ghost" class="justify-start">
-                <i class="icon-layers mr-2"></i>
+                <i-lucide [img]="LayersIcon" class="w-4 h-4 mr-2" />
                 Projects
               </button>
               <button z-button zType="ghost" class="justify-start">
-                <i class="icon-users mr-2"></i>
+                <i-lucide [img]="UsersIcon" class="w-4 h-4 mr-2" />
                 Team
               </button>
             </z-sidebar-group>
@@ -82,6 +84,12 @@ import { SidebarComponent, SidebarGroupComponent, SidebarGroupLabelComponent } f
 })
 export class LayoutDemoFullComponent {
   year = new Date().getFullYear();
+
+  protected readonly BellIcon = BellIcon;
+  protected readonly HouseIcon = HouseIcon;
+  protected readonly LayersIcon = LayersIcon;
+  protected readonly UsersIcon = UsersIcon;
+  protected readonly SearchIcon = SearchIcon;
 }
 
 ```
