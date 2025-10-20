@@ -15,6 +15,7 @@ import {
 } from './pagination.variants';
 import { buttonVariants, ZardButtonVariants } from '../button/button.variants';
 import { mergeClasses } from '../../shared/utils/utils';
+import { ChevronLeftIcon, ChevronRightIcon, EllipsisIcon, LucideAngularModule } from 'lucide-angular';
 
 @Component({
   selector: 'z-pagination-content',
@@ -95,16 +96,18 @@ export class ZardPaginationButtonComponent {
   exportAs: 'zPaginationPrevious',
   changeDetection: ChangeDetectionStrategy.OnPush,
   encapsulation: ViewEncapsulation.None,
-  imports: [ZardPaginationButtonComponent],
+  imports: [ZardPaginationButtonComponent, LucideAngularModule],
   template: `
     <z-pagination-button aria-label="Go to previous page" [class]="classes()" [zSize]="'default'">
-      <div class="icon-chevron-left"></div>
+      <i-lucide [img]="ChevronLeftIcon" class="w-4 h-4" />
       <span class="hidden sm:block">Previous</span>
     </z-pagination-button>
   `,
 })
 export class ZardPaginationPreviousComponent {
   readonly class = input<ClassValue>('');
+
+  protected readonly ChevronLeftIcon = ChevronLeftIcon;
 
   protected readonly classes = computed(() => mergeClasses(paginationPreviousVariants(), this.class()));
 }
@@ -114,16 +117,18 @@ export class ZardPaginationPreviousComponent {
   exportAs: 'zPaginationNext',
   changeDetection: ChangeDetectionStrategy.OnPush,
   encapsulation: ViewEncapsulation.None,
-  imports: [ZardPaginationButtonComponent],
+  imports: [ZardPaginationButtonComponent, LucideAngularModule],
   template: `
     <z-pagination-button aria-label="Go to next page" [class]="classes()" [zSize]="'default'">
       <span class="hidden sm:block">Next</span>
-      <div class="icon-chevron-right"></div>
+      <i-lucide [img]="ChevronRightIcon" class="w-4 h-4" />
     </z-pagination-button>
   `,
 })
 export class ZardPaginationNextComponent {
   readonly class = input<ClassValue>('');
+
+  protected readonly ChevronRightIcon = ChevronRightIcon;
 
   protected readonly classes = computed(() => mergeClasses(paginationNextVariants(), this.class()));
 }
@@ -131,10 +136,11 @@ export class ZardPaginationNextComponent {
 @Component({
   selector: 'z-pagination-ellipsis',
   exportAs: 'zPaginationEllipsis',
+  imports: [LucideAngularModule],
   changeDetection: ChangeDetectionStrategy.OnPush,
   encapsulation: ViewEncapsulation.None,
   template: `
-    <span aria-hidden="true" role="presentation" data-slot="pagination-ellipsis" class="icon-ellipsis"></span>
+    <span-lucide aria-hidden="true" role="presentation" data-slot="pagination-ellipsis" [img]="EllipsisIcon" class="w-4 h-4"></span-lucide>
     <span class="sr-only">More pages</span>
   `,
   host: {
@@ -144,6 +150,8 @@ export class ZardPaginationNextComponent {
 export class ZardPaginationEllipsisComponent {
   readonly class = input<ClassValue>('');
 
+  protected readonly EllipsisIcon = EllipsisIcon;
+
   protected readonly classes = computed(() => mergeClasses(paginationEllipsisVariants(), this.class()));
 }
 
@@ -152,12 +160,12 @@ export class ZardPaginationEllipsisComponent {
   exportAs: 'zPagination',
   changeDetection: ChangeDetectionStrategy.OnPush,
   encapsulation: ViewEncapsulation.None,
-  imports: [ZardPaginationContentComponent, ZardPaginationItemComponent, ZardPaginationButtonComponent],
+  imports: [LucideAngularModule, ZardPaginationContentComponent, ZardPaginationItemComponent, ZardPaginationButtonComponent],
   template: `
     <z-pagination-content>
       <z-pagination-item>
         <z-pagination-button aria-label="Go to previous page" [zSize]="zSize()" [zDisabled]="disabled() || currentPage() === 1" (zClick)="goToPrevious()">
-          <div class="icon-chevron-left"></div>
+          <i-lucide [img]="ChevronLeftIcon" class="w-4 h-4" />
         </z-pagination-button>
       </z-pagination-item>
 
@@ -171,7 +179,7 @@ export class ZardPaginationEllipsisComponent {
 
       <z-pagination-item>
         <z-pagination-button aria-label="Go to next page" [zSize]="zSize()" [zDisabled]="disabled() || currentPage() === zTotal()" (zClick)="goToNext()">
-          <div class="icon-chevron-right"></div>
+          <i-lucide [img]="ChevronRightIcon" class="w-4 h-4" />
         </z-pagination-button>
       </z-pagination-item>
     </z-pagination-content>
@@ -206,6 +214,9 @@ export class ZardPaginationComponent implements ControlValueAccessor {
   readonly currentPage = linkedSignal(this.zPageIndex);
 
   readonly pages = computed<number[]>(() => Array.from({ length: Math.max(0, this.zTotal()) }, (_, i) => i + 1));
+
+  protected readonly ChevronLeftIcon = ChevronLeftIcon;
+  protected readonly ChevronRightIcon = ChevronRightIcon;
 
   goToPage(page: number): void {
     if (this.disabled()) return;
