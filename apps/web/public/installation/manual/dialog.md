@@ -27,11 +27,12 @@ import { ZardButtonComponent } from '../button/button.component';
 import { ZardDialogRef } from './dialog-ref';
 import { ZardDialogService } from './dialog.service';
 import { dialogVariants } from './dialog.variants';
+import { LucideAngularModule, LucideIconData, XIcon } from 'lucide-angular';
 
 const noopFun = () => void 0;
 export type OnClickCallback<T> = (instance: T) => false | void | object;
 export class ZardDialogOptions<T, U> {
-  zCancelIcon?: string;
+  zCancelIcon?: LucideIconData;
   zCancelText?: string | null;
   zClosable?: boolean;
   zContent?: string | TemplateRef<T> | Type<T>;
@@ -42,7 +43,7 @@ export class ZardDialogOptions<T, U> {
   zMaskClosable?: boolean;
   zOkDestructive?: boolean;
   zOkDisabled?: boolean;
-  zOkIcon?: string;
+  zOkIcon?: LucideIconData;
   zOkText?: string | null;
   zOnCancel?: EventEmitter<T> | OnClickCallback<T> = noopFun;
   zOnOk?: EventEmitter<T> | OnClickCallback<T> = noopFun;
@@ -54,11 +55,11 @@ export class ZardDialogOptions<T, U> {
 @Component({
   selector: 'z-dialog',
   exportAs: 'zDialog',
-  imports: [OverlayModule, PortalModule, ZardButtonComponent],
+  imports: [LucideAngularModule, OverlayModule, PortalModule, ZardButtonComponent],
   template: `
     @if (config.zClosable || config.zClosable === undefined) {
       <button data-testid="z-close-header-button" z-button zType="ghost" zSize="sm" class="absolute right-1 top-1" (click)="onCloseClick()">
-        <i class="icon-x text-sm"></i>
+        <i-lucide [img]="XIcon" class="w-3 h-3 mr-0.5 mb-0.5" />
       </button>
     }
 
@@ -87,7 +88,7 @@ export class ZardDialogOptions<T, U> {
         @if (config.zCancelText !== null) {
           <button data-testid="z-cancel-button" z-button zType="outline" (click)="onCloseClick()">
             @if (config.zCancelIcon) {
-              <i class="icon-{{ config.zCancelIcon }}"></i>
+              <i-lucide [img]="config.zCancelIcon" class="w-4 h-4" />
             }
 
             {{ config.zCancelText || 'Cancel' }}
@@ -97,7 +98,7 @@ export class ZardDialogOptions<T, U> {
         @if (config.zOkText !== null) {
           <button data-testid="z-ok-button" z-button [zType]="config.zOkDestructive ? 'destructive' : 'default'" [disabled]="config.zOkDisabled" (click)="onOkClick()">
             @if (config.zOkIcon) {
-              <i class="icon-{{ config.zOkIcon }}"></i>
+              <i-lucide [img]="config.zOkIcon" class="w-4 h-4" />
             }
 
             {{ config.zOkText || 'OK' }}
@@ -131,6 +132,8 @@ export class ZardDialogComponent<T, U> extends BasePortalOutlet {
   protected readonly isStringContent = typeof this.config.zContent === 'string';
 
   readonly portalOutlet = viewChild.required(CdkPortalOutlet);
+
+  protected readonly XIcon = XIcon;
 
   okTriggered = output<void>();
   cancelTriggered = output<void>();

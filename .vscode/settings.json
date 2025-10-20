@@ -12,9 +12,7 @@
   "importSorter.importStringConfiguration.maximumNumberOfImportExpressionsPerLine.count": 180,
   "importSorter.importStringConfiguration.hasSemicolon": true,
   "commit-message-editor.view.defaultView": "form",
-  "commit-message-editor.dynamicTemplate": [
-    "{type}{scope}{breaking_change}: {description}{taskid}"
-  ],
+  "commit-message-editor.dynamicTemplate": ["{type}{scope}{breaking_change}: {description}{taskid}"],
   "commit-message-editor.tokens": [
     {
       "label": "Type",
@@ -114,13 +112,7 @@
       "default": false
     }
   ],
-  "cSpell.words": [
-    "Borderless",
-    "ngzard",
-    "testid",
-    "zard",
-    "Zard"
-  ],
+  "cSpell.words": ["Borderless", "ngzard", "testid", "zard", "Zard"],
   "[html]": {
     "editor.defaultFormatter": "dbaeumer.vscode-eslint"
   },
@@ -139,4 +131,7 @@
   "[jsonc]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
+  "tailwindCSS.experimental.configFile": {
+    "apps/web/src/styles.css": "**/**"
+  }
 }
