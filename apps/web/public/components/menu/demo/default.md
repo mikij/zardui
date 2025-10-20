@@ -81,13 +81,13 @@ import { BookOpenIcon, ChevronDownIcon, ChevronRightIcon, FileTextIcon, InfoIcon
                     <i-lucide [img]="InfoIcon" class="size-4 mr-2" />
                     Help & Support
                   </div>
-                  <i-lucide [img]="ChevronRightIcon" class="size-4 " />
+                  <i-lucide [img]="ChevronRightIcon" class="size-4" />
                 </button>
 
                 <z-divider zSpacing="sm"></z-divider>
 
                 <button z-menu-item (click)="log('Community')">
-                  <i-lucide [img]="UsersIcon" class="size-4 mr-2"></i-lucide>
+                  <i-lucide [img]="UsersIcon" class="size-4 mr-2" />
                   Community
                 </button>
               </div>

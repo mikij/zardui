@@ -3,6 +3,7 @@ import { Component } from '@angular/core';
 import { ZardBadgeComponent } from '../../badge/badge.component';
 import { ZardButtonComponent } from '../../button/button.component';
 import { ZardTableBodyComponent, ZardTableCellComponent, ZardTableComponent, ZardTableHeadComponent, ZardTableHeaderComponent, ZardTableRowComponent } from '../table.component';
+import { CopyIcon, EyeIcon, LucideAngularModule } from 'lucide-angular';
 
 export interface Payment {
   id: string;
@@ -14,6 +15,7 @@ export interface Payment {
 @Component({
   standalone: true,
   imports: [
+    LucideAngularModule,
     ZardTableComponent,
     ZardTableHeaderComponent,
     ZardTableBodyComponent,
@@ -52,10 +54,10 @@ export interface Payment {
                 <td z-table-cell>
                   <div class="flex items-center gap-2">
                     <z-button zType="ghost" zSize="icon" (click)="copyPaymentId(payment.id)" title="Copy payment ID">
-                      <div class="icon-copy"></div>
+                      <i-lucide [img]="CopyIcon" class="size-4" />
                     </z-button>
                     <z-button zType="ghost" zSize="icon" (click)="viewDetails(payment)" title="View details">
-                      <div class="icon-eye"></div>
+                      <i-lucide [img]="EyeIcon" class="size-4" />
                     </z-button>
                   </div>
                 </td>
@@ -72,6 +74,9 @@ export interface Payment {
   `,
 })
 export class ZardDemoTablePaymentsComponent {
+  protected readonly CopyIcon = CopyIcon;
+  protected readonly EyeIcon = EyeIcon;
+
   payments: Payment[] = [
     {
       id: 'm5gr84i9',
