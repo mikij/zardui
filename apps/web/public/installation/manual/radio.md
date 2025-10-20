@@ -72,12 +72,12 @@ export class ZardRadioComponent implements ControlValueAccessor {
   protected readonly svgSizeClass = computed(() => {
     const size = this.zSize();
     if (size === 'lg') {
-      return 'h-5 w-5';
+      return 'size-5';
     }
     if (size === 'sm') {
-      return 'h-2.5 w-2.5';
+      return 'size-2.5';
     }
-    return 'h-3.5 w-3.5'; // default size
+    return 'size-3.5'; // default size
   });
 
   checked = false;
@@ -127,9 +127,9 @@ export const radioVariants = cva(
         secondary: 'border-secondary checked:bg-secondary',
       },
       zSize: {
-        default: 'h-4 w-4',
-        sm: 'h-3 w-3',
-        lg: 'h-6 w-6',
+        default: 'size-4',
+        sm: 'size-3',
+        lg: 'size-6',
       },
       zShape: {
         default: 'rounded-full',

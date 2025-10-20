@@ -19,7 +19,7 @@
     @if (selectedFile()) {
       <div class="flex items-center justify-between gap-3 px-4 py-1 border-b border-border">
         <div class="flex items-center gap-3">
-          <img [src]="getFileIcon(selectedFile()!.name)" alt="file icon" class="w-4 h-4 dark:invert" />
+          <img [src]="getFileIcon(selectedFile()!.name)" alt="file icon" class="size-4 dark:invert" />
           <span class="text-sm text-code-foreground">{{ selectedFile()!.path }}</span>
         </div>
         <button (click)="copyToClipboard()" z-button zType="ghost" title="Copy code">

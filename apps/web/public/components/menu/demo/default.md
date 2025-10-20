@@ -4,11 +4,12 @@ import { Component } from '@angular/core';
 import { ZardButtonComponent } from '../../button/button.component';
 import { ZardDividerComponent } from '../../divider/divider.component';
 import { ZardMenuModule } from '../menu.module';
+import { BookOpenIcon, ChevronDownIcon, ChevronRightIcon, FileTextIcon, InfoIcon, LucideAngularModule, UserIcon } from 'lucide-angular';
 
 @Component({
   selector: 'zard-demo-menu-default',
   standalone: true,
-  imports: [ZardMenuModule, ZardButtonComponent, ZardDividerComponent],
+  imports: [LucideAngularModule, ZardMenuModule, ZardButtonComponent, ZardDividerComponent],
   template: `
     <nav class="flex items-center justify-between p-4">
       <div class="flex items-center space-x-6">
@@ -16,7 +17,7 @@ import { ZardMenuModule } from '../menu.module';
           <div class="relative">
             <button z-button zType="ghost" z-menu zTrigger="hover" [zMenuTriggerFor]="productsMenu">
               Products
-              <i class="icon-chevron-down ml-1"></i>
+              <i-lucide [img]="ChevronDownIcon" class="size-4 ml-1" />
             </button>
 
             <ng-template #productsMenu>
@@ -32,7 +33,7 @@ import { ZardMenuModule } from '../menu.module';
           <div class="relative">
             <button z-button zType="ghost" z-menu zTrigger="hover" [zMenuTriggerFor]="solutionsMenu">
               Solutions
-              <i class="icon-chevron-down ml-1"></i>
+              <i-lucide [img]="ChevronDownIcon" class="size-4 ml-1" />
             </button>
 
             <ng-template #solutionsMenu>
@@ -60,33 +61,33 @@ import { ZardMenuModule } from '../menu.module';
           <div class="relative">
             <button z-button zType="ghost" z-menu zTrigger="hover" [zMenuTriggerFor]="resourcesMenu">
               Resources
-              <i class="icon-chevron-down ml-1"></i>
+              <i-lucide [img]="ChevronDownIcon" class="size-4 ml-1" />
             </button>
 
             <ng-template #resourcesMenu>
               <div z-menu-content class="w-56">
                 <button z-menu-item (click)="log('Blog')">
-                  <i class="icon-book-open mr-2"></i>
+                  <i-lucide [img]="BookOpenIcon" class="size-4 mr-2" />
                   Blog
                 </button>
 
                 <button z-menu-item (click)="log('Documentation')">
-                  <i class="icon-file-text mr-2"></i>
+                  <i-lucide [img]="FileTextIcon" class="size-4 mr-2" />
                   Documentation
                 </button>
 
                 <button z-menu-item z-menu [zMenuTriggerFor]="helpSubmenu" class="justify-between">
                   <div class="flex items-center">
-                    <i class="icon-info mr-2"></i>
+                    <i-lucide [img]="InfoIcon" class="size-4 mr-2" />
                     Help & Support
                   </div>
-                  <i class="icon-chevron-right"></i>
+                  <i-lucide [img]="ChevronRightIcon" class="size-4 " />
                 </button>
 
                 <z-divider zSpacing="sm"></z-divider>
 
                 <button z-menu-item (click)="log('Community')">
-                  <i class="icon-users mr-2"></i>
+                  <i-lucide [img]="UsersIcon" class="size-4 mr-2"></i-lucide>
                   Community
                 </button>
               </div>
@@ -111,6 +112,13 @@ import { ZardMenuModule } from '../menu.module';
   `,
 })
 export class ZardDemoMenuDefaultComponent {
+  protected readonly BookOpenIcon = BookOpenIcon;
+  protected readonly ChevronDownIcon = ChevronDownIcon;
+  protected readonly ChevronRightIcon = ChevronRightIcon;
+  protected readonly FileTextIcon = FileTextIcon;
+  protected readonly InfoIcon = InfoIcon;
+  protected readonly UsersIcon = UserIcon;
+
   log(item: string) {
     console.log('Navigate to:', item);
   }

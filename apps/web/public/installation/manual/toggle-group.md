@@ -77,11 +77,11 @@ export class ZardToggleGroupComponent implements ControlValueAccessor {
   protected readonly iconSize = computed(() => {
     switch (this.zSize()) {
       case 'sm':
-        return 'w-3 h-3';
+        return 'size-3';
       case 'lg':
-        return 'w-5 h-5';
+        return 'size-5';
       default:
-        return 'w-4 h-4';
+        return 'size-4';
     }
   });
 

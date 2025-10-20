@@ -14,13 +14,13 @@ import { ZardBreadcrumbModule } from '../breadcrumb.module';
           <z-breadcrumb-link zLink="/">Home</z-breadcrumb-link>
         </z-breadcrumb-item>
         <z-breadcrumb-separator>
-          <i-lucide [img]="MoveRightIcon" class="w-4 h-4" />
+          <i-lucide [img]="MoveRightIcon" class="size-4" />
         </z-breadcrumb-separator>
         <z-breadcrumb-item>
           <z-breadcrumb-link zLink="/components">Components</z-breadcrumb-link>
         </z-breadcrumb-item>
         <z-breadcrumb-separator>
-          <i-lucide [img]="MoveRightIcon" class="w-4 h-4" />
+          <i-lucide [img]="MoveRightIcon" class="size-4" />
         </z-breadcrumb-separator>
         <z-breadcrumb-item>
           <z-breadcrumb-page>Breadcrumb</z-breadcrumb-page>

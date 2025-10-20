@@ -129,7 +129,7 @@ export class ZardBreadcrumbPageComponent {
   template: `
     <li aria-hidden="true" role="presentation" [class]="classes()">
       <ng-content>
-        <i-lucide [img]="ChevronRightIcon" class="w-4 h-4" />
+        <i-lucide [img]="ChevronRightIcon" class="size-4" />
       </ng-content>
     </li>
   `,
@@ -151,7 +151,7 @@ export class ZardBreadcrumbSeparatorComponent {
   changeDetection: ChangeDetectionStrategy.OnPush,
   encapsulation: ViewEncapsulation.None,
   imports: [LucideAngularModule],
-  template: ` <span-lucide [img]="EllipsisIcon" aria-hidden="true" role="presentation" class="w-4 h-4"></span-lucide> `,
+  template: ` <span-lucide [img]="EllipsisIcon" aria-hidden="true" role="presentation" class="size-4" /> `,
   host: {
     '[class]': 'classes()',
   },

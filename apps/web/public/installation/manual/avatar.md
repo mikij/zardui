@@ -16,7 +16,7 @@ import { LoaderCircleIcon, LucideAngularModule } from 'lucide-angular';
   imports: [LucideAngularModule],
   template: `
     @if (zLoading()) {
-      <i-lucide [img]="LoaderCircleIcon" class="w-4 h-4 animate-spin {{ zLoading() }}" />
+      <i-lucide [img]="LoaderCircleIcon" class="size-4 animate-spin {{ zLoading() }}" />
     } @else {
       @if (zImage()?.fallback) {
         <span class="text-base absolute m-auto z-0">{{ zImage()?.fallback }}</span>
@@ -151,11 +151,11 @@ export const avatarVariants = cva('relative flex flex-row items-center justify-c
       ghost: 'hover:bg-accent hover:text-accent-foreground shadow-sm shadow-black',
     },
     zSize: {
-      default: 'w-12 h-12',
-      sm: 'w-10 h-10',
-      md: 'w-18 h-18',
-      lg: 'w-37 h-37',
-      full: 'w-full h-full',
+      default: 'size-12',
+      sm: 'size-10',
+      md: 'size-18',
+      lg: 'size-37',
+      full: 'size-full',
     },
     zShape: {
       default: 'rounded-md',

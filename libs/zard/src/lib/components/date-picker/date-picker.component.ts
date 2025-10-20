@@ -36,7 +36,7 @@ export type { ZardDatePickerVariants };
       [attr.aria-haspopup]="true"
       aria-label="Choose date"
     >
-      <i-lucide [img]="CalendarIcon" />
+      <i-lucide [img]="CalendarIcon" class="size-4" />
       <span [class]="textClasses()">
         {{ displayText() }}
       </span>

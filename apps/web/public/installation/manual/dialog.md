@@ -59,7 +59,7 @@ export class ZardDialogOptions<T, U> {
   template: `
     @if (config.zClosable || config.zClosable === undefined) {
       <button data-testid="z-close-header-button" z-button zType="ghost" zSize="sm" class="absolute right-1 top-1" (click)="onCloseClick()">
-        <i-lucide [img]="XIcon" class="w-3 h-3 mr-0.5 mb-0.5" />
+        <i-lucide [img]="XIcon" class="size-3" />
       </button>
     }
 
@@ -88,7 +88,7 @@ export class ZardDialogOptions<T, U> {
         @if (config.zCancelText !== null) {
           <button data-testid="z-cancel-button" z-button zType="outline" (click)="onCloseClick()">
             @if (config.zCancelIcon) {
-              <i-lucide [img]="config.zCancelIcon" class="w-4 h-4" />
+              <i-lucide [img]="config.zCancelIcon" class="size-4" />
             }
 
             {{ config.zCancelText || 'Cancel' }}
@@ -98,7 +98,7 @@ export class ZardDialogOptions<T, U> {
         @if (config.zOkText !== null) {
           <button data-testid="z-ok-button" z-button [zType]="config.zOkDestructive ? 'destructive' : 'default'" [disabled]="config.zOkDisabled" (click)="onOkClick()">
             @if (config.zOkIcon) {
-              <i-lucide [img]="config.zOkIcon" class="w-4 h-4" />
+              <i-lucide [img]="config.zOkIcon" class="size-4" />
             }
 
             {{ config.zOkText || 'OK' }}

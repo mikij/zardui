@@ -21,9 +21,9 @@ type OnChangeType = (value: any) => void;
         <input #input type="checkbox" [class]="classes()" [checked]="checked" [disabled]="disabled()" (blur)="onCheckboxBlur()" name="checkbox" />
         <i-lucide
           [img]="CheckIcon"
-          class="h-4 w-4 absolute flex items-center justify-center text-primary-foreground peer-checked:opacity-100 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none"
+          class="size-4 absolute flex items-center justify-center text-primary-foreground peer-checked:opacity-100 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none"
           [class.opacity-0]="!checked"
-        ></i-lucide>
+        />
       </main>
       <label [class]="labelClasses()" for="checkbox" [class.cursor-not-allowed]="disabled()">
         <ng-content></ng-content>

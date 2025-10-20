@@ -35,10 +35,10 @@ import { BellIcon, HouseIcon, LayersIcon, LucideAngularModule, SearchIcon, Users
           </div>
           <div class="flex items-center gap-2">
             <button z-button zType="ghost" zSize="sm">
-              <i-lucide [img]="SearchIcon" class="w-4 h-4" />
+              <i-lucide [img]="SearchIcon" class="size-4" />
             </button>
             <button z-button zType="ghost" zSize="sm">
-              <i-lucide [img]="BellIcon" class="w-4 h-4" />
+              <i-lucide [img]="BellIcon" class="size-4" />
             </button>
           </div>
         </div>
@@ -50,15 +50,15 @@ import { BellIcon, HouseIcon, LayersIcon, LucideAngularModule, SearchIcon, Users
             <z-sidebar-group>
               <z-sidebar-group-label>Menu</z-sidebar-group-label>
               <button z-button zType="secondary" class="justify-start">
-                <i-lucide [img]="HouseIcon" class="w-4 h-4 mr-2" />
+                <i-lucide [img]="HouseIcon" class="size-4 mr-2" />
                 Dashboard
               </button>
               <button z-button zType="ghost" class="justify-start">
-                <i-lucide [img]="LayersIcon" class="w-4 h-4 mr-2" />
+                <i-lucide [img]="LayersIcon" class="size-4 mr-2" />
                 Projects
               </button>
               <button z-button zType="ghost" class="justify-start">
-                <i-lucide [img]="UsersIcon" class="w-4 h-4 mr-2" />
+                <i-lucide [img]="UsersIcon" class="size-4 mr-2" />
                 Team
               </button>
             </z-sidebar-group>

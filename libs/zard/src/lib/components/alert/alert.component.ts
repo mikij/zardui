@@ -14,7 +14,7 @@ import { alertVariants, ZardAlertVariants } from './alert.variants';
   imports: [LucideAngularModule],
   template: `
     @if (iconName()) {
-      <i-lucide [name]="zIcon()" [img]="iconName()" class="w-4 h-4" />
+      <i-lucide [name]="zIcon()" [img]="iconName()" class="size-4" />
     }
 
     <div class="flex flex-col gap-1 w-full">

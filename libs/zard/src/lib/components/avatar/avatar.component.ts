@@ -13,7 +13,7 @@ import { LoaderCircleIcon, LucideAngularModule } from 'lucide-angular';
   imports: [LucideAngularModule],
   template: `
     @if (zLoading()) {
-      <i-lucide [img]="LoaderCircleIcon" class="w-4 h-4 animate-spin {{ zLoading() }}" />
+      <i-lucide [img]="LoaderCircleIcon" class="size-4 animate-spin {{ zLoading() }}" />
     } @else {
       @if (zImage()?.fallback) {
         <span class="text-base absolute m-auto z-0">{{ zImage()?.fallback }}</span>

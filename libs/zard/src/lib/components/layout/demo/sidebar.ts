@@ -55,7 +55,7 @@ interface MenuItem {
             }
             @for (item of mainMenuItems; track item.label) {
               <button z-button zType="ghost" [class]="sidebarCollapsed() ? 'justify-center' : 'justify-start'" [zTooltip]="sidebarCollapsed() ? item.label : ''" zPosition="right">
-                <i-lucide [img]="item.icon" class="w-4 h-4" [class.mr-2]="!sidebarCollapsed()" />
+                <i-lucide [img]="item.icon" class="size-4" [class.mr-2]="!sidebarCollapsed()" />
                 @if (!sidebarCollapsed()) {
                   <span>{{ item.label }}</span>
                 }
@@ -79,10 +79,10 @@ interface MenuItem {
                   [zTooltip]="sidebarCollapsed() ? item.label : null"
                   zPosition="right"
                 >
-                  <i-lucide [img]="item.icon" class="w-4 h-4" [class.mr-2]="!sidebarCollapsed()" />
+                  <i-lucide [img]="item.icon" class="size-4" [class.mr-2]="!sidebarCollapsed()" />
                   @if (!sidebarCollapsed()) {
                     <span class="flex-1 text-left">{{ item.label }}</span>
-                    <i-lucide [img]="ChevronRightIcon" class="w-4 h-4" />
+                    <i-lucide [img]="ChevronRightIcon" class="size-4" />
                   }
                 </button>
 
@@ -101,7 +101,7 @@ interface MenuItem {
                   [zTooltip]="sidebarCollapsed() ? item.label : ''"
                   zPosition="right"
                 >
-                  <i-lucide [img]="item.icon" class="w-4 h-4" [class.mr-2]="!sidebarCollapsed()" />
+                  <i-lucide [img]="item.icon" class="size-4" [class.mr-2]="!sidebarCollapsed()" />
                   @if (!sidebarCollapsed()) {
                     <span>{{ item.label }}</span>
                   }
@@ -125,23 +125,23 @@ interface MenuItem {
                   <div class="text-xs">test&#64;zardui.com</div>
                 </div>
 
-                <i-lucide [img]="ChevronsUpDownIcon" class="ml-auto w-4 h-4" />
+                <i-lucide [img]="ChevronsUpDownIcon" class="ml-auto size-4" />
               }
             </div>
 
             <ng-template #userMenu>
               <div z-menu-content class="w-48">
                 <button z-menu-item>
-                  <i-lucide [img]="UserIcon" class="mr-2 w-4 h-4" />
+                  <i-lucide [img]="UserIcon" class="mr-2 size-4" />
                   Profile
                 </button>
                 <button z-menu-item>
-                  <i-lucide [img]="SettingsIcon" class="mr-2 w-4 h-4" />
+                  <i-lucide [img]="SettingsIcon" class="mr-2 size-4" />
                   Settings
                 </button>
                 <z-divider zSpacing="sm" />
                 <button z-menu-item>
-                  <i-lucide [img]="LogOutIcon" class="mr-2 w-4 h-4" />
+                  <i-lucide [img]="LogOutIcon" class="mr-2 size-4" />
                   Logout
                 </button>
               </div>
@@ -154,7 +154,7 @@ interface MenuItem {
       <z-content class="min-h-[200px]">
         <div class="flex items-center">
           <button z-button zType="ghost" zSize="sm" class="-ml-2" (click)="toggleSidebar()">
-            <i-lucide [img]="PanelLeftIcon" class="w-4 h-4" />
+            <i-lucide [img]="PanelLeftIcon" class="size-4" />
           </button>
 
           <z-divider zOrientation="vertical" class="h-4 ml-2" />

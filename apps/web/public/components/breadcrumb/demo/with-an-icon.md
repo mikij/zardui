@@ -12,21 +12,21 @@ import { ZardBreadcrumbModule } from '../breadcrumb.module';
       <z-breadcrumb-list zWrap="wrap" zAlign="start">
         <z-breadcrumb-item>
           <z-breadcrumb-link zLink="/">
-            <i-lucide [img]="HouseIcon" class="w-4 h-4" />
+            <i-lucide [img]="HouseIcon" class="size-4" />
             Home
           </z-breadcrumb-link>
         </z-breadcrumb-item>
         <z-breadcrumb-separator />
         <z-breadcrumb-item>
           <z-breadcrumb-link zLink="/components">
-            <i-lucide [img]="PuzzleIcon" class="w-4 h-4" />
+            <i-lucide [img]="PuzzleIcon" class="size-4" />
             Components
           </z-breadcrumb-link>
         </z-breadcrumb-item>
         <z-breadcrumb-separator />
         <z-breadcrumb-item>
           <z-breadcrumb-page>
-            <i-lucide [img]="SquareLibraryIcon" class="w-4 h-4" />
+            <i-lucide [img]="SquareLibraryIcon" class="size-4" />
             Breadcrumb
           </z-breadcrumb-page>
         </z-breadcrumb-item>

@@ -115,7 +115,7 @@ export interface ZardComboboxGroup {
                       >
                         {{ option.label }}
                         @if (option.value === getCurrentValue()) {
-                          <i-lucide [img]="CheckIcon" class="ml-auto h-4 w-4" />
+                          <i-lucide [img]="CheckIcon" class="ml-auto size-4" />
                         }
                       </z-command-option>
                     }
@@ -131,7 +131,7 @@ export interface ZardComboboxGroup {
                     >
                       {{ option.label }}
                       @if (option.value === getCurrentValue()) {
-                        <i-lucide [img]="CheckIcon" class="ml-auto h-4 w-4" />
+                        <i-lucide [img]="CheckIcon" class="ml-auto size-4" />
                       }
                     </z-command-option>
                   }
@@ -148,7 +148,7 @@ export interface ZardComboboxGroup {
                 >
                   {{ option.label }}
                   @if (option.value === getCurrentValue()) {
-                    <i-lucide [img]="CheckIcon" class="ml-auto h-4 w-4" />
+                    <i-lucide [img]="CheckIcon" class="ml-auto size-4" />
                   }
                 </z-command-option>
               }

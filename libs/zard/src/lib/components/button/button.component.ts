@@ -15,7 +15,7 @@ import { buttonVariants, ZardButtonVariants } from './button.variants';
   imports: [LucideAngularModule],
   template: `
     @if (zLoading()) {
-      <i-lucide [img]="LoaderCircleIcon" class="w-4 h-4 animate-spin duration-2000" />
+      <i-lucide [img]="LoaderCircleIcon" class="size-4 animate-spin duration-2000" />
     }
 
     <ng-content></ng-content>

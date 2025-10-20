@@ -16,7 +16,7 @@ import { BookOpenIcon, ChevronDownIcon, ChevronRightIcon, FileTextIcon, InfoIcon
           <div class="relative">
             <button z-button zType="ghost" z-menu zTrigger="hover" [zMenuTriggerFor]="productsMenu">
               Products
-              <i-lucide [img]="ChevronDownIcon" class="w-4 h-4 ml-1" />
+              <i-lucide [img]="ChevronDownIcon" class="size-4 ml-1" />
             </button>
 
             <ng-template #productsMenu>
@@ -32,7 +32,7 @@ import { BookOpenIcon, ChevronDownIcon, ChevronRightIcon, FileTextIcon, InfoIcon
           <div class="relative">
             <button z-button zType="ghost" z-menu zTrigger="hover" [zMenuTriggerFor]="solutionsMenu">
               Solutions
-              <i-lucide [img]="ChevronDownIcon" class="w-4 h-4 ml-1" />
+              <i-lucide [img]="ChevronDownIcon" class="size-4 ml-1" />
             </button>
 
             <ng-template #solutionsMenu>
@@ -60,33 +60,33 @@ import { BookOpenIcon, ChevronDownIcon, ChevronRightIcon, FileTextIcon, InfoIcon
           <div class="relative">
             <button z-button zType="ghost" z-menu zTrigger="hover" [zMenuTriggerFor]="resourcesMenu">
               Resources
-              <i-lucide [img]="ChevronDownIcon" class="w-4 h-4 ml-1" />
+              <i-lucide [img]="ChevronDownIcon" class="size-4 ml-1" />
             </button>
 
             <ng-template #resourcesMenu>
               <div z-menu-content class="w-56">
                 <button z-menu-item (click)="log('Blog')">
-                  <i-lucide [img]="BookOpenIcon" class="w-4 h-4 mr-2" />
+                  <i-lucide [img]="BookOpenIcon" class="size-4 mr-2" />
                   Blog
                 </button>
 
                 <button z-menu-item (click)="log('Documentation')">
-                  <i-lucide [img]="FileTextIcon" class="w-4 h-4 mr-2" />
+                  <i-lucide [img]="FileTextIcon" class="size-4 mr-2" />
                   Documentation
                 </button>
 
                 <button z-menu-item z-menu [zMenuTriggerFor]="helpSubmenu" class="justify-between">
                   <div class="flex items-center">
-                    <i-lucide [img]="InfoIcon" class="w-4 h-4 mr-2" />
+                    <i-lucide [img]="InfoIcon" class="size-4 mr-2" />
                     Help & Support
                   </div>
-                  <i-lucide [img]="ChevronRightIcon" class="w-4 h-4 " />
+                  <i-lucide [img]="ChevronRightIcon" class="size-4" />
                 </button>
 
                 <z-divider zSpacing="sm"></z-divider>
 
                 <button z-menu-item (click)="log('Community')">
-                  <i-lucide [img]="UsersIcon" class="w-4 h-4 mr-2"></i-lucide>
+                  <i-lucide [img]="UsersIcon" class="size-4 mr-2" />
                   Community
                 </button>
               </div>

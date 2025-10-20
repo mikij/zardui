@@ -124,7 +124,7 @@ import type { ClassValue } from 'clsx';
         <span class="group-hover:underline">
           {{ zTitle() }}
         </span>
-        <i-lucide [img]="ChevronDownIcon" class="transition-transform duration-200 w-4 h-4" [class.rotate-180]="isOpen()" />
+        <i-lucide [img]="ChevronDownIcon" class="transition-transform duration-200 size-4" [class.rotate-180]="isOpen()" />
       </button>
 
       <div

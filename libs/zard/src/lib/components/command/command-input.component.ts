@@ -35,7 +35,7 @@ import type { ClassValue } from 'clsx';
   encapsulation: ViewEncapsulation.None,
   template: `
     <div class="flex items-center border-b px-3" cmdk-input-wrapper="">
-      <i-lucide [img]="SearchIcon" class="mr-2 h-4 w-4 shrink-0 stroke-muted-foreground flex items-center justify-center" />
+      <i-lucide [img]="SearchIcon" class="mr-2 size-4 shrink-0 stroke-muted-foreground flex items-center justify-center" />
       <input
         #searchInput
         [class]="classes()"

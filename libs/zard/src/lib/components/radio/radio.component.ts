@@ -69,12 +69,12 @@ export class ZardRadioComponent implements ControlValueAccessor {
   protected readonly svgSizeClass = computed(() => {
     const size = this.zSize();
     if (size === 'lg') {
-      return 'h-5 w-5';
+      return 'size-5';
     }
     if (size === 'sm') {
-      return 'h-2.5 w-2.5';
+      return 'size-2.5';
     }
-    return 'h-3.5 w-3.5'; // default size
+    return 'size-3.5'; // default size
   });
 
   checked = false;

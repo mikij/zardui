@@ -47,7 +47,7 @@ export type { ZardCalendarVariants };
           aria-label="Previous month"
           [class]="navButtonClasses()"
         >
-          <i-lucide [img]="ChevronLeftIcon" />
+          <i-lucide [img]="ChevronLeftIcon" class="size-4" />
         </button>
 
         <!-- Month and Year Selectors -->
@@ -68,7 +68,7 @@ export type { ZardCalendarVariants };
         </div>
 
         <button z-button zType="ghost" [zSize]="navButtonSize()" (click)="nextMonth()" [disabled]="isNextDisabled()" aria-label="Next month" [class]="navButtonClasses()">
-          <i-lucide [img]="ChevronRightIcon" />
+          <i-lucide [img]="ChevronRightIcon" class="size-4" />
         </button>
       </div>
 

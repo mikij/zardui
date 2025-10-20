@@ -31,7 +31,7 @@ import { ChevronLeftIcon, ChevronRightIcon, LucideAngularModule } from 'lucide-a
           [attr.aria-label]="zCollapsed() ? 'Expand sidebar' : 'Collapse sidebar'"
           [attr.aria-expanded]="!zCollapsed()"
         >
-          <i-lucide [img]="chevronIcon()" class="w-4 h-4 text-base" />
+          <i-lucide [img]="chevronIcon()" class="size-4 text-base" />
         </div>
       }
 

@@ -28,7 +28,7 @@ import type { ClassValue } from 'clsx';
         (mouseenter)="onMouseEnter()"
       >
         @if (zIcon()) {
-          <i-lucide [img]="zIcon()" class="mr-2 shrink-0 w-4 h-4" />
+          <i-lucide [img]="zIcon()" class="mr-2 shrink-0 size-4" />
         }
         <span class="flex-1">{{ zLabel() }}</span>
         @if (zShortcut()) {

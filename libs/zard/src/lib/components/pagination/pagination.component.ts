@@ -96,7 +96,7 @@ export class ZardPaginationButtonComponent {
   imports: [ZardPaginationButtonComponent, LucideAngularModule],
   template: `
     <z-pagination-button aria-label="Go to previous page" [class]="classes()" [zSize]="'default'">
-      <i-lucide [img]="ChevronLeftIcon" class="w-4 h-4" />
+      <i-lucide [img]="ChevronLeftIcon" class="size-4" />
       <span class="hidden sm:block">Previous</span>
     </z-pagination-button>
   `,
@@ -118,7 +118,7 @@ export class ZardPaginationPreviousComponent {
   template: `
     <z-pagination-button aria-label="Go to next page" [class]="classes()" [zSize]="'default'">
       <span class="hidden sm:block">Next</span>
-      <i-lucide [img]="ChevronRightIcon" class="w-4 h-4" />
+      <i-lucide [img]="ChevronRightIcon" class="size-4" />
     </z-pagination-button>
   `,
 })
@@ -137,7 +137,7 @@ export class ZardPaginationNextComponent {
   changeDetection: ChangeDetectionStrategy.OnPush,
   encapsulation: ViewEncapsulation.None,
   template: `
-    <span-lucide aria-hidden="true" role="presentation" data-slot="pagination-ellipsis" [img]="EllipsisIcon" class="w-4 h-4"></span-lucide>
+    <span-lucide aria-hidden="true" role="presentation" data-slot="pagination-ellipsis" [img]="EllipsisIcon" class="size-4" />
     <span class="sr-only">More pages</span>
   `,
   host: {
@@ -162,7 +162,7 @@ export class ZardPaginationEllipsisComponent {
     <z-pagination-content>
       <z-pagination-item>
         <z-pagination-button aria-label="Go to previous page" [zSize]="zSize()" [zDisabled]="disabled() || currentPage() === 1" (zClick)="goToPrevious()">
-          <i-lucide [img]="ChevronLeftIcon" class="w-4 h-4" />
+          <i-lucide [img]="ChevronLeftIcon" class="size-4" />
         </z-pagination-button>
       </z-pagination-item>
 
@@ -176,7 +176,7 @@ export class ZardPaginationEllipsisComponent {
 
       <z-pagination-item>
         <z-pagination-button aria-label="Go to next page" [zSize]="zSize()" [zDisabled]="disabled() || currentPage() === zTotal()" (zClick)="goToNext()">
-          <i-lucide [img]="ChevronRightIcon" class="w-4 h-4" />
+          <i-lucide [img]="ChevronRightIcon" class="size-4" />
         </z-pagination-button>
       </z-pagination-item>
     </z-pagination-content>

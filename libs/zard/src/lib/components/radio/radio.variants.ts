@@ -10,9 +10,9 @@ export const radioVariants = cva(
         secondary: 'border-secondary checked:bg-secondary',
       },
       zSize: {
-        default: 'h-4 w-4',
-        sm: 'h-3 w-3',
-        lg: 'h-6 w-6',
+        default: 'size-4',
+        sm: 'size-3',
+        lg: 'size-6',
       },
       zShape: {
         default: 'rounded-full',
