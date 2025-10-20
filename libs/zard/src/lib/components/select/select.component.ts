@@ -23,6 +23,7 @@ import { isPlatformBrowser } from '@angular/common';
 import { Overlay, OverlayModule, OverlayPositionBuilder, OverlayRef } from '@angular/cdk/overlay';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { TemplatePortal } from '@angular/cdk/portal';
+import { ChevronDownIcon, LucideAngularModule } from 'lucide-angular';
 
 import { selectContentVariants, selectTriggerVariants, ZardSelectTriggerVariants } from './select.variants';
 import { mergeClasses, transform } from '../../shared/utils/utils';
@@ -35,7 +36,7 @@ type OnChangeType = (value: string) => void;
   selector: 'z-select, [z-select]',
   standalone: true,
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [OverlayModule],
+  imports: [LucideAngularModule, OverlayModule],
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,
@@ -67,7 +68,7 @@ type OnChangeType = (value: string) => void;
           <span class="text-muted-foreground">{{ zPlaceholder() }}</span>
         }
       </span>
-      <i class="icon-chevron-down size-4 opacity-50"></i>
+      <i-lucide [img]="ChevronDownIcon" class="size-4 opacity-50" />
     </button>
 
     <ng-template #dropdownTemplate>
@@ -89,6 +90,8 @@ export class ZardSelectComponent implements ControlValueAccessor, OnInit, AfterC
   readonly dropdownTemplate = viewChild.required<TemplateRef<any>>('dropdownTemplate');
 
   readonly selectItems = contentChildren(ZardSelectItemComponent);
+
+  protected readonly ChevronDownIcon = ChevronDownIcon;
 
   private overlayRef?: OverlayRef;
   private portal?: TemplatePortal;

@@ -1,4 +1,5 @@
 import { ChangeDetectionStrategy, Component, computed, ElementRef, forwardRef, inject, input, linkedSignal } from '@angular/core';
+import { CheckIcon, LucideAngularModule } from 'lucide-angular';
 
 import { mergeClasses, transform } from '../../shared/utils/utils';
 import { selectItemVariants } from './select.variants';
@@ -13,7 +14,7 @@ interface SelectHost {
   selector: 'z-select-item, [z-select-item]',
   standalone: true,
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [],
+  imports: [LucideAngularModule],
   host: {
     '[class]': 'classes()',
     '[attr.value]': 'zValue()',
@@ -25,11 +26,11 @@ interface SelectHost {
     '(click)': 'onClick()',
   },
   template: `
-    <span class="absolute right-2 flex size-3.5 items-center justify-center">
-      @if (isSelected()) {
-        <i class="icon-check size-2 contents"></i>
-      }
-    </span>
+    @if (isSelected()) {
+      <span class="absolute right-2 flex items-center justify-center">
+        <i-lucide [img]="CheckIcon" class="size-3.5" />
+      </span>
+    }
     <ng-content></ng-content>
   `,
 })
@@ -44,6 +45,8 @@ export class ZardSelectItemComponent {
     const element = this.elementRef?.nativeElement;
     return (element?.textContent || element?.innerText)?.trim() ?? '';
   });
+
+  protected readonly CheckIcon = CheckIcon;
 
   protected readonly classes = computed(() => mergeClasses(selectItemVariants(), this.class()));
 

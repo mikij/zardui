@@ -26,6 +26,7 @@ import { isPlatformBrowser } from '@angular/common';
 import { Overlay, OverlayModule, OverlayPositionBuilder, OverlayRef } from '@angular/cdk/overlay';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { TemplatePortal } from '@angular/cdk/portal';
+import { ChevronDownIcon, LucideAngularModule } from 'lucide-angular';
 
 import { selectContentVariants, selectTriggerVariants, ZardSelectTriggerVariants } from './select.variants';
 import { mergeClasses, transform } from '../../shared/utils/utils';
@@ -38,7 +39,7 @@ type OnChangeType = (value: string) => void;
   selector: 'z-select, [z-select]',
   standalone: true,
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [OverlayModule],
+  imports: [LucideAngularModule, OverlayModule],
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,
@@ -70,7 +71,7 @@ type OnChangeType = (value: string) => void;
           <span class="text-muted-foreground">{{ zPlaceholder() }}</span>
         }
       </span>
-      <i class="icon-chevron-down size-4 opacity-50"></i>
+      <i-lucide [img]="ChevronDownIcon" class="size-4 opacity-50" />
     </button>
 
     <ng-template #dropdownTemplate>
@@ -92,6 +93,8 @@ export class ZardSelectComponent implements ControlValueAccessor, OnInit, AfterC
   readonly dropdownTemplate = viewChild.required<TemplateRef<any>>('dropdownTemplate');
 
   readonly selectItems = contentChildren(ZardSelectItemComponent);
+
+  protected readonly ChevronDownIcon = ChevronDownIcon;
 
   private overlayRef?: OverlayRef;
   private portal?: TemplatePortal;
@@ -494,6 +497,7 @@ export type ZardSelectItemVariants = VariantProps<typeof selectItemVariants>;
 
 ```angular-ts title="select-item.component.ts" expandable="true" expandableTitle="Expand" copyButton showLineNumbers
 import { ChangeDetectionStrategy, Component, computed, ElementRef, forwardRef, inject, input, linkedSignal } from '@angular/core';
+import { CheckIcon, LucideAngularModule } from 'lucide-angular';
 
 import { mergeClasses, transform } from '../../shared/utils/utils';
 import { selectItemVariants } from './select.variants';
@@ -508,7 +512,7 @@ interface SelectHost {
   selector: 'z-select-item, [z-select-item]',
   standalone: true,
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [],
+  imports: [LucideAngularModule],
   host: {
     '[class]': 'classes()',
     '[attr.value]': 'zValue()',
@@ -520,11 +524,11 @@ interface SelectHost {
     '(click)': 'onClick()',
   },
   template: `
-    <span class="absolute right-2 flex size-3.5 items-center justify-center">
-      @if (isSelected()) {
-        <i class="icon-check size-2 contents"></i>
-      }
-    </span>
+    @if (isSelected()) {
+      <span class="absolute right-2 flex items-center justify-center">
+        <i-lucide [img]="CheckIcon" class="size-3.5" />
+      </span>
+    }
     <ng-content></ng-content>
   `,
 })
@@ -539,6 +543,8 @@ export class ZardSelectItemComponent {
     const element = this.elementRef?.nativeElement;
     return (element?.textContent || element?.innerText)?.trim() ?? '';
   });
+
+  protected readonly CheckIcon = CheckIcon;
 
   protected readonly classes = computed(() => mergeClasses(selectItemVariants(), this.class()));
 
