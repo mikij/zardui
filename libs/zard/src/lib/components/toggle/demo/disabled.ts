@@ -1,14 +1,17 @@
 import { Component } from '@angular/core';
+import { BoldIcon, LucideAngularModule } from 'lucide-angular';
 
 import { ZardToggleComponent } from '../toggle.component';
 
 @Component({
   standalone: true,
-  imports: [ZardToggleComponent],
+  imports: [LucideAngularModule, ZardToggleComponent],
   template: `
     <z-toggle aria-label="Toggle disabled" disabled>
-      <div class="icon-bold"></div>
+      <i-lucide [img]="BoldIcon" class="size-4" />
     </z-toggle>
   `,
 })
-export class ZardDemoToggleDisabledComponent {}
+export class ZardDemoToggleDisabledComponent {
+  protected readonly BoldIcon = BoldIcon;
+}

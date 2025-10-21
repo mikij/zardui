@@ -1,21 +1,21 @@
 import { FormsModule } from '@angular/forms';
 import { Component } from '@angular/core';
+import { LightbulbIcon, LightbulbOffIcon, LucideAngularModule } from 'lucide-angular';
 
 import { ZardToggleComponent } from '../toggle.component';
 
 @Component({
   standalone: true,
-  imports: [ZardToggleComponent, FormsModule],
+  imports: [LucideAngularModule, ZardToggleComponent, FormsModule],
   template: `
+    @let icon = lightOn ? LightbulbIcon : LightbulbOffIcon;
     <z-toggle aria-label="Turn on the light" [(ngModel)]="lightOn">
-      @if (lightOn) {
-        <div class="icon-lightbulb"></div>
-      } @else {
-        <div class="icon-lightbulb-off"></div>
-      }
+      <i-lucide [img]="icon" class="size-4" />
     </z-toggle>
   `,
 })
 export class ZardDemoToggleWithFormComponent {
-  lightOn = false;
+  protected readonly LightbulbIcon = LightbulbIcon;
+  protected readonly LightbulbOffIcon = LightbulbOffIcon;
+  protected lightOn = false;
 }

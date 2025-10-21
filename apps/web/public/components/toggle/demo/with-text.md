@@ -1,18 +1,21 @@
 ```angular-ts showLineNumbers copyButton
 import { Component } from '@angular/core';
+import { ItalicIcon, LucideAngularModule } from 'lucide-angular';
 
 import { ZardToggleComponent } from '../toggle.component';
 
 @Component({
   standalone: true,
-  imports: [ZardToggleComponent],
+  imports: [LucideAngularModule, ZardToggleComponent],
   template: `
     <z-toggle>
-      <div class="icon-italic"></div>
+      <i-lucide [img]="ItalicIcon" class="size-4" />
       Italic
     </z-toggle>
   `,
 })
-export class ZardDemoToggleWithTextComponent {}
+export class ZardDemoToggleWithTextComponent {
+  protected readonly ItalicIcon = ItalicIcon;
+}
 
 ```
