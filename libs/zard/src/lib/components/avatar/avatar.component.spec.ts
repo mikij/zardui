@@ -67,8 +67,7 @@ describe('ZardAvatarComponent', () => {
 
       expect(avatarElement.classList.contains('bg-destructive')).toBeTruthy();
       expect(avatarElement.classList.contains('text-destructive-foreground')).toBeTruthy();
-      expect(avatarElement.classList.contains('w-37')).toBeTruthy();
-      expect(avatarElement.classList.contains('h-37')).toBeTruthy();
+      expect(avatarElement.classList.contains('size-37')).toBeTruthy();
       expect(avatarElement.classList.contains('rounded-full')).toBeTruthy();
       // Check that border-related classes are applied
       const classListArray = avatarElement.className.split(' ');
@@ -117,8 +116,7 @@ describe('ZardAvatarComponent', () => {
       fixture.detectChanges();
 
       const avatarElement = fixture.debugElement.query(By.directive(ZardAvatarComponent)).nativeElement;
-      expect(avatarElement.classList.contains('w-10')).toBeTruthy();
-      expect(avatarElement.classList.contains('h-10')).toBeTruthy();
+      expect(avatarElement.classList.contains('size-10')).toBeTruthy();
     });
 
     it('should apply medium size classes', () => {
@@ -126,8 +124,7 @@ describe('ZardAvatarComponent', () => {
       fixture.detectChanges();
 
       const avatarElement = fixture.debugElement.query(By.directive(ZardAvatarComponent)).nativeElement;
-      expect(avatarElement.classList.contains('w-18')).toBeTruthy();
-      expect(avatarElement.classList.contains('h-18')).toBeTruthy();
+      expect(avatarElement.classList.contains('size-18')).toBeTruthy();
     });
 
     it('should apply full size classes', () => {
@@ -135,8 +132,7 @@ describe('ZardAvatarComponent', () => {
       fixture.detectChanges();
 
       const avatarElement = fixture.debugElement.query(By.directive(ZardAvatarComponent)).nativeElement;
-      expect(avatarElement.classList.contains('w-full')).toBeTruthy();
-      expect(avatarElement.classList.contains('h-full')).toBeTruthy();
+      expect(avatarElement.classList.contains('size-full')).toBeTruthy();
     });
 
     it('should apply square shape class', () => {
