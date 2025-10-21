@@ -3,12 +3,7 @@
     @if (shouldShowImage()) {
       @if (currentImage()) {
         <div class="flex flex-col h-full min-h-svh items-center justify-center p-4 rounded-lg gap-4">
-          <img
-            [src]="currentImage()"
-            [alt]="block()?.title || 'Block preview'"
-            class="max-w-full h-auto rounded-lg shadow-lg"
-            (error)="onImageError($event)"
-          />
+          <img [src]="currentImage()" [alt]="block()?.title || 'Block preview'" class="max-w-full h-auto rounded-lg shadow-lg" (error)="onImageError($event)" />
           <p class="text-sm text-muted-foreground">{{ block()?.title }}</p>
         </div>
       }

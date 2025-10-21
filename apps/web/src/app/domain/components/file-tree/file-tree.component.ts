@@ -14,8 +14,8 @@ import { ChevronRightIcon, FileIcon, FolderIcon, LucideAngularModule } from 'luc
       @if (node.type === 'folder' && node.path) {
         <div class="folder-item">
           <button (click)="toggleFolder(node.path)" z-button zType="ghost" class="w-full justify-start ring-sidebar-ring">
-            <i-lucide [img]="ChevronRightIcon" class="size-3" [class.rotate-90]="isOpen(node.path)"></i-lucide>
-            <i-lucide [img]="FolderIcon" class="size-3" />
+            <i-lucide [img]="ChevronRightIcon" class="size-4" [class.rotate-90]="isOpen(node.path)"></i-lucide>
+            <i-lucide [img]="FolderIcon" class="size-4" />
             <span class="font-normal truncate">{{ node.name }}</span>
           </button>
           @if (isOpen(node.path) && node.children && node.children.length > 0) {
@@ -36,7 +36,7 @@ import { ChevronRightIcon, FileIcon, FolderIcon, LucideAngularModule } from 'luc
           [class]="selectedFilePath() === node.file.path ? 'bg-muted-foreground/15 text-sidebar-accent-foreground' : ''"
           class=" flex items-center gap-2 py-1 px-2 rounded transition-colors w-full text-left text-sm"
         >
-          <i-lucide [img]="FileIcon" class="size-3 flex-shrink-0" />
+          <i-lucide [img]="FileIcon" class="size-4 flex-shrink-0" />
           <span class="truncate">{{ node.name }}</span>
         </button>
       }
