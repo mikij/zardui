@@ -4,15 +4,18 @@ import { Component, input, signal, computed } from '@angular/core';
 import { SimpleCodeHighlightComponent } from '../../../shared/components/simple-code-highlight/simple-code-highlight.component';
 import type { BlockFile, FileTreeNode } from '../block-container/block-container.component';
 import { FileTreeComponent } from '../file-tree/file-tree.component';
+import { ClipboardIcon, LucideAngularModule } from 'lucide-angular';
 
 @Component({
   selector: 'z-block-code-viewer',
   standalone: true,
-  imports: [SimpleCodeHighlightComponent, FileTreeComponent, ZardBreadcrumbModule],
+  imports: [SimpleCodeHighlightComponent, FileTreeComponent, LucideAngularModule, ZardBreadcrumbModule],
   templateUrl: './block-code-viewer.component.html',
 })
 export class BlockCodeViewerComponent {
   readonly files = input.required<BlockFile[]>();
+
+  protected readonly ClipboardIcon = ClipboardIcon;
 
   protected readonly selectedFile = signal<BlockFile | null>(null);
   protected readonly openFolders = signal<Set<string>>(new Set());

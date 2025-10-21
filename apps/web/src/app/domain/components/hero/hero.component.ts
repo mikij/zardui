@@ -2,12 +2,13 @@ import { ZardButtonComponent } from '@zard/components/button/button.component';
 import { ZardBadgeComponent } from '@zard/components/badge/badge.component';
 import { Component, ChangeDetectionStrategy, signal } from '@angular/core';
 import { RouterModule } from '@angular/router';
+import { ChevronRightIcon, LucideAngularModule } from 'lucide-angular';
 
 @Component({
   selector: 'z-hero',
   standalone: true,
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [RouterModule, ZardButtonComponent, ZardBadgeComponent],
+  imports: [LucideAngularModule, RouterModule, ZardButtonComponent, ZardBadgeComponent, LucideAngularModule],
   template: `
     <section class="relative overflow-hidden p-5 md:p-0">
       <div class="absolute inset-0 bg-gradient-to-br from-background via-background to-muted/20 dark:from-background dark:via-background dark:to-primary/5"></div>
@@ -35,7 +36,7 @@ import { RouterModule } from '@angular/router';
           <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
             <a z-button routerLink="/docs/components" class="group bg-primary text-primary-foreground hover:bg-primary/90 px-8 py-3">
               Browse Components
-              <i class="icon-chevron-right shrink-0 transition-all duration-300 ease-out group-hover:translate-x-1 ml-2"></i>
+              <i-lucide [img]="ChevronRightIcon" class="shrink-0 transition-all duration-300 ease-out group-hover:translate-x-1 ml-2" />
             </a>
             <a z-button zType="outline" routerLink="/docs/installation" class="px-8 py-3"> Get Started </a>
           </div>
@@ -56,6 +57,7 @@ import { RouterModule } from '@angular/router';
   `,
 })
 export class HeroComponent {
+  protected readonly ChevronRightIcon = ChevronRightIcon;
   readonly stackImages = signal([
     { src: 'icons/angular.svg', class: 'size-8 invert dark:invert-0', alt: 'Angular logo' },
     { src: 'icons/typescript.svg', class: 'size-8 invert-0 dark:invert', alt: 'TypeScript logo' },

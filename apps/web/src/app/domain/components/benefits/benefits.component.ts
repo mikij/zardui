@@ -1,11 +1,13 @@
-import { ZardBadgeComponent } from '@zard/components/badge/badge.component';
 import { Component, ChangeDetectionStrategy, signal } from '@angular/core';
+import { CodeIcon, HeartIcon, LayersIcon, LucideAngularModule, PaletteIcon, ShieldIcon, ZapIcon } from 'lucide-angular';
+
+import { ZardBadgeComponent } from '@zard/components/badge/badge.component';
 
 @Component({
   selector: 'z-benefits',
   standalone: true,
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [ZardBadgeComponent],
+  imports: [LucideAngularModule, ZardBadgeComponent],
   template: `
     <section class="relative py-24 overflow-hidden">
       <!-- Background with gradient -->
@@ -42,7 +44,7 @@ import { Component, ChangeDetectionStrategy, signal } from '@angular/core';
                 >
                   <!-- Icon container -->
                   <div class="flex items-center justify-center w-12 h-12 rounded-xl bg-primary/10 text-primary mb-4 group-hover:scale-110 transition-transform duration-300">
-                    <i [class]="feature.icon + ' text-xl'"></i>
+                    <i-lucide [img]="feature.icon" />
                   </div>
 
                   <!-- Content -->
@@ -100,34 +102,34 @@ import { Component, ChangeDetectionStrategy, signal } from '@angular/core';
 export class BenefitsComponent {
   readonly features = signal([
     {
-      icon: 'icon-zap',
+      icon: ZapIcon,
       title: 'Lightning Fast',
       description: 'Built with performance in mind. Optimized bundle size and runtime performance for production apps.',
       highlight: 'Fast',
     },
     {
-      icon: 'icon-palette',
+      icon: PaletteIcon,
       title: 'Beautiful Design',
       description: 'Carefully crafted components that follow modern design principles and accessibility standards.',
     },
     {
-      icon: 'icon-code',
+      icon: CodeIcon,
       title: 'Developer Experience',
       description: 'TypeScript-first, excellent IDE support, and comprehensive documentation for smooth development.',
       highlight: 'DX',
     },
     {
-      icon: 'icon-layers',
+      icon: LayersIcon,
       title: 'Modular Architecture',
       description: 'Import only what you need. Tree-shakable components that keep your bundle size minimal.',
     },
     {
-      icon: 'icon-shield',
+      icon: ShieldIcon,
       title: 'Type Safe',
       description: 'Full TypeScript support with strict typing, ensuring reliability and better code completion.',
     },
     {
-      icon: 'icon-heart',
+      icon: HeartIcon,
       title: 'Community Driven',
       description: 'Open source with active community contributions, regular updates and responsive support.',
     },

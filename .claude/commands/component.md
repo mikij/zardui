@@ -176,5 +176,5 @@ export const COMPONENTS: ComponentData[] = [
 
 # Icon patterns
 
-- We use `lucide-static` icons for consistency
-- Use `icon-[iconName]` for icon inputs
+- We use `lucide-angular` icons for consistency
+- Import `[iconName]` for icon inputs

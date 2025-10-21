@@ -9,6 +9,7 @@ import { ZardBadgeComponent } from '@zard/components/badge/badge.component';
 import { ZardCardComponent } from '@zard/components/card/card.component';
 import { ZardTooltipModule } from '@zard/components/tooltip/tooltip';
 import { RouterModule, Router } from '@angular/router';
+import { ArrowRightIcon, LucideAngularModule } from 'lucide-angular';
 
 import { ZardCarouselComponent, ZardCarouselItemComponent } from './carousel/carousel.component';
 
@@ -67,7 +68,7 @@ import { ZardCarouselComponent, ZardCarouselItemComponent } from './carousel/car
                         @case ('cta') {
                           <div class="text-center">
                             <div class="flex items-center justify-center p-2 rounded-2xl bg-white/10 backdrop-blur-sm">
-                              <i class="icon-arrow-right text-xl"></i>
+                              <i-lucide [img]="ArrowRightIcon" class="text-xl" />
                             </div>
 
                             <div>
@@ -89,6 +90,7 @@ import { ZardCarouselComponent, ZardCarouselItemComponent } from './carousel/car
     </section>
   `,
   imports: [
+    LucideAngularModule,
     RouterModule,
     ZardCardComponent,
     ZardCarouselComponent,
@@ -105,6 +107,7 @@ import { ZardCarouselComponent, ZardCarouselItemComponent } from './carousel/car
 })
 export class ShowcaseComponent {
   private readonly router = inject(Router);
+  protected readonly ArrowRightIcon = ArrowRightIcon;
   readonly itemWidth = 100 / 3.2;
 
   readonly showcaseComponents = signal([

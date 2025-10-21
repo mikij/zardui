@@ -1,11 +1,12 @@
 import { ZardBadgeComponent } from '@zard/components/badge/badge.component';
 import { ZardCardComponent } from '@zard/components/card/card.component';
 import { Component } from '@angular/core';
+import { BanIcon, CircleCheckIcon, CircleDollarSignIcon, LucideAngularModule, LucideIconData, XIcon, ZapIcon } from 'lucide-angular';
 
 interface OpenSourceFeature {
   title: string;
   description: string;
-  icon: string;
+  icon: LucideIconData;
 }
 
 interface StandAgainstItem {
@@ -16,7 +17,7 @@ interface StandAgainstItem {
 @Component({
   selector: 'open-source-section',
   standalone: true,
-  imports: [ZardBadgeComponent, ZardCardComponent],
+  imports: [LucideAngularModule, ZardBadgeComponent, ZardCardComponent],
   template: `
     <section class="flex flex-col gap-8">
       <div class="flex flex-col gap-4">
@@ -32,7 +33,7 @@ interface StandAgainstItem {
           <z-card [zTitle]="title">
             <ng-template #title>
               <div class="flex h-10 w-10 items-center justify-center rounded-full bg-green-100 text-green-600 dark:bg-green-900/30 dark:text-green-400">
-                <i class="text-lg font-normal" [class]="feature.icon"></i>
+                <i-lucide class="text-lg font-normal" [img]="feature.icon" />
               </div>
               <h3 class="mt-4 text-base font-semibold">{{ feature.title }}</h3>
             </ng-template>
@@ -44,13 +45,13 @@ interface StandAgainstItem {
       <!-- What We Stand Against -->
       <div class="rounded-lg bg-destructive/5 p-6">
         <h3 class="mb-4 text-lg font-semibold flex items-center gap-2">
-          <i class="icon-ban text-destructive"></i>
+          <i-lucide [img]="BanIcon" class="size-4 text-destructive" />
           What We Stand Against
         </h3>
         <div class="grid gap-3 md:grid-cols-3">
           @for (item of standAgainstItems; track $index) {
             <div class="flex items-start gap-3">
-              <div class="icon-x text-destructive"></div>
+              <i-lucide [img]="XIcon" class="size-4 text-destructive" />
               <div>
                 <p class="font-medium text-sm">{{ item.title }}</p>
                 <p class="text-xs text-muted-foreground">{{ item.description }}</p>
@@ -63,25 +64,28 @@ interface StandAgainstItem {
   `,
 })
 export class OpenSourceSection {
-  readonly features: OpenSourceFeature[] = [
+  protected readonly BanIcon = BanIcon;
+  protected readonly XIcon = XIcon;
+
+  protected readonly features: OpenSourceFeature[] = [
     {
       title: 'Community Owned',
       description: "Governed by developers, not corporations. Every decision is made transparently with the community's best interests at heart.",
-      icon: 'icon-circle-check',
+      icon: CircleCheckIcon,
     },
     {
       title: 'Forever Free',
       description: 'Every component, every feature, always free. No premium tiers, no hidden costs, no "pro" versions.',
-      icon: 'icon-circle-dollar-sign',
+      icon: CircleDollarSignIcon,
     },
     {
       title: 'Built in Public',
       description: 'All development happens in the open. Watch us build, contribute your ideas, and shape the future together.',
-      icon: 'icon-zap',
+      icon: ZapIcon,
     },
   ];
 
-  readonly standAgainstItems: StandAgainstItem[] = [
+  protected readonly standAgainstItems: StandAgainstItem[] = [
     {
       title: 'Corporate Control',
       description: 'No single entity will ever own or control ZardUI',

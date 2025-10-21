@@ -13,12 +13,13 @@ import type { Observable } from 'rxjs';
 
 import { DocResearcherComponent } from '../doc-researcher/doc-researcher.component';
 import { MobileMenuComponent } from '../mobile-nav/mobile-nav.component';
+import { LucideAngularModule, MoonIcon, SunIcon } from 'lucide-angular';
 
 @Component({
   selector: 'z-header',
   templateUrl: './header.component.html',
   standalone: true,
-  imports: [RouterModule, ZardButtonComponent, ZardBadgeComponent, MobileMenuComponent, ZardDividerComponent, AsyncPipe, DocResearcherComponent],
+  imports: [LucideAngularModule, RouterModule, ZardButtonComponent, ZardBadgeComponent, MobileMenuComponent, ZardDividerComponent, AsyncPipe, DocResearcherComponent],
 })
 export class HeaderComponent {
   readonly docResearcher = viewChild.required(DocResearcherComponent);
@@ -29,6 +30,9 @@ export class HeaderComponent {
   private readonly githubService = inject(GithubService);
   private readonly darkmodeService = inject(DarkModeService);
   readonly $repoStars: Observable<number> = this.githubService.getStarsCount();
+
+  protected readonly MoonIcon = MoonIcon;
+  protected readonly SunIcon = SunIcon;
 
   toggleTheme(): void {
     this.darkmodeService.toggleTheme();
