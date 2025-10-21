@@ -1,19 +1,24 @@
 import {
-  afterNextRender,
+  AfterViewInit,
   ChangeDetectionStrategy,
   Component,
   computed,
   contentChildren,
+  DestroyRef,
   ElementRef,
+  inject,
+  Injector,
   input,
   output,
+  runInInjectionContext,
   signal,
   TemplateRef,
   viewChild,
   ViewEncapsulation,
 } from '@angular/core';
-import { combineLatest, interval, startWith } from 'rxjs';
 import { CommonModule } from '@angular/common';
+import { takeUntilDestroyed, toObservable } from '@angular/core/rxjs-interop';
+import { ChevronDownIcon, ChevronLeftIcon, ChevronRightIcon, ChevronUpIcon, LucideAngularModule } from 'lucide-angular';
 
 import { tabButtonVariants, tabContainerVariants, tabNavVariants, ZardTabVariants } from './tabs.variants';
 import { ZardButtonComponent } from '../button/button.component';
@@ -40,19 +45,20 @@ export class ZardTabComponent {
 @Component({
   selector: 'z-tab-group',
   standalone: true,
-  imports: [CommonModule, ZardButtonComponent],
+  imports: [CommonModule, LucideAngularModule, ZardButtonComponent],
   template: `
     <div class="tab-group" [ngClass]="containerClasses()">
+      @let showArrow = showScrollArrows();
       @if (navBeforeContent()) {
         <div [class]="navGridClasses()">
-          @if (showArrow()) {
+          @if (showArrow) {
             @if (zTabsPosition() === 'top' || zTabsPosition() === 'bottom') {
               <button class="scroll-btn scroll-left pr-4 cursor-pointer" [class]="zTabsPosition() === 'top' ? 'mb-4' : 'mt-4'" (click)="scrollNav('left')">
-                <i class="icon-chevron-left"></i>
+                <i-lucide [img]="ChevronLeftIcon" class="size-4" />
               </button>
             } @else {
               <button class="scroll-btn scroll-up pb-4 cursor-pointer" [class]="zTabsPosition() === 'left' ? 'mr-4' : 'ml-4'" (click)="scrollNav('up')">
-                <i class="icon-chevron-up"></i>
+                <i-lucide [img]="ChevronUpIcon" class="size-4" />
               </button>
             }
           }
@@ -65,14 +71,14 @@ export class ZardTabComponent {
             }
           </nav>
 
-          @if (showArrow()) {
+          @if (showArrow) {
             @if (zTabsPosition() === 'top' || zTabsPosition() === 'bottom') {
               <button class="scroll-btn scroll-right pl-4 cursor-pointer" [class]="zTabsPosition() === 'top' ? 'mb-4' : 'mt-4'" (click)="scrollNav('right')">
-                <i class="icon-chevron-right"></i>
+                <i-lucide [img]="ChevronRightIcon" class="size-4" />
               </button>
             } @else {
               <button class="scroll-btn scroll-down pt-4 cursor-pointer" [class]="zTabsPosition() === 'left' ? 'mr-4' : 'ml-4'" (click)="scrollNav('down')">
-                <i class="icon-chevron-down"></i>
+                <i-lucide [img]="ChevronDownIcon" class="size-4" />
               </button>
             }
           }
@@ -89,14 +95,14 @@ export class ZardTabComponent {
 
       @if (!navBeforeContent()) {
         <div [class]="navGridClasses()">
-          @if (showArrow()) {
+          @if (showArrow) {
             @if (zTabsPosition() === 'top' || zTabsPosition() === 'bottom') {
               <button class="scroll-btn scroll-left pr-4 cursor-pointer" [class]="zTabsPosition() === 'top' ? 'mb-4' : 'mt-4'" (click)="scrollNav('left')">
-                <i class="icon-chevron-left"></i>
+                <i-lucide [img]="ChevronLeftIcon" class="size-4" />
               </button>
             } @else {
               <button class="scroll-btn scroll-up pb-4 cursor-pointer" [class]="zTabsPosition() === 'left' ? 'mr-4' : 'ml-4'" (click)="scrollNav('up')">
-                <i class="icon-chevron-up"></i>
+                <i-lucide [img]="ChevronUpIcon" class="size-4" />
               </button>
             }
           }
@@ -109,14 +115,14 @@ export class ZardTabComponent {
             }
           </nav>
 
-          @if (showArrow()) {
+          @if (showArrow) {
             @if (zTabsPosition() === 'top' || zTabsPosition() === 'bottom') {
               <button class="scroll-btn scroll-right pl-4 cursor-pointer" [class]="zTabsPosition() === 'top' ? 'mb-4' : 'mt-4'" (click)="scrollNav('right')">
-                <i class="icon-chevron-right"></i>
+                <i-lucide [img]="ChevronRightIcon" class="size-4" />
               </button>
             } @else {
               <button class="scroll-btn scroll-down pt-4 cursor-pointer" [class]="zTabsPosition() === 'left' ? 'mr-4' : 'ml-4'" (click)="scrollNav('down')">
-                <i class="icon-chevron-down"></i>
+                <i-lucide [img]="ChevronDownIcon" class="size-4" />
               </button>
             }
           }
@@ -146,20 +152,20 @@ export class ZardTabComponent {
     `,
   ],
 })
-export class ZardTabGroupComponent {
+export class ZardTabGroupComponent implements AfterViewInit {
   private readonly tabComponents = contentChildren(ZardTabComponent, { descendants: true });
   private readonly tabsContainer = viewChild.required<ElementRef>('tabNav');
+  private readonly destroyRef = inject(DestroyRef);
+  private readonly injector = inject(Injector);
+
+  protected readonly ChevronUpIcon = ChevronUpIcon;
+  protected readonly ChevronDownIcon = ChevronDownIcon;
+  protected readonly ChevronLeftIcon = ChevronLeftIcon;
+  protected readonly ChevronRightIcon = ChevronRightIcon;
 
   protected readonly tabs = computed(() => this.tabComponents());
   protected readonly activeTabIndex = signal<number>(0);
-  protected readonly hasScrollSignal = signal<boolean>(false);
-
-  protected readonly showArrow = computed(() => {
-    const _tabs = this.tabs();
-    const _position = this.zTabsPosition();
-    const scrollStatus = this.hasScrollSignal();
-    return scrollStatus;
-  });
+  protected readonly showScrollArrows = signal<boolean>(false);
 
   protected readonly zOnTabChange = output<{
     index: number;
@@ -178,21 +184,23 @@ export class ZardTabGroupComponent {
   public readonly zScrollAmount = input(100);
   public readonly zAlignTabs = input<zAlign>('start');
 
-  constructor() {
-    afterNextRender(() => {
-      if (this.tabs().length > 0) {
-        this.setActiveTab(0);
-      }
-
-      combineLatest([interval(100).pipe(startWith(0))]).subscribe(() => {
-        this.hasScrollSignal.set(this.hasScroll());
-      });
+  ngAfterViewInit(): void {
+    if (this.tabs().length) {
+      this.setActiveTab(0);
+    }
+    runInInjectionContext(this.injector, () => {
+      toObservable(this.zShowArrow)
+        .pipe(takeUntilDestroyed(this.destroyRef))
+        .subscribe(() => {
+          if (this.hasScroll() !== this.showScrollArrows()) {
+            this.showScrollArrows.set(this.hasScroll());
+          }
+        });
     });
   }
-
   private hasScroll(): boolean {
-    if (this.tabsContainer && this.tabsContainer().nativeElement && this.zShowArrow()) {
-      const navElement: HTMLElement = this.tabsContainer().nativeElement;
+    const navElement: HTMLElement = this.tabsContainer()?.nativeElement;
+    if (this.zShowArrow() && navElement) {
       return navElement.scrollWidth > navElement.clientWidth || navElement.scrollHeight > navElement.clientHeight;
     }
     return false;
@@ -231,13 +239,13 @@ export class ZardTabGroupComponent {
 
   protected readonly navGridClasses = computed(() => {
     const position = this.zTabsPosition();
-    const hasArrows = this.showArrow();
+    const hasArrows = this.showScrollArrows();
     return position === 'left' || position === 'right' ? `grid${hasArrows ? ' grid-rows-[25px_1fr_25px]' : ''}` : `grid${hasArrows ? ' grid-cols-[25px_1fr_25px]' : ''}`;
   });
 
   protected readonly containerClasses = computed(() => tabContainerVariants({ zPosition: this.zTabsPosition() }));
 
-  protected readonly navClasses = computed(() => tabNavVariants({ zPosition: this.zTabsPosition(), zAlignTabs: this.showArrow() ? 'start' : this.zAlignTabs() }));
+  protected readonly navClasses = computed(() => tabNavVariants({ zPosition: this.zTabsPosition(), zAlignTabs: this.showScrollArrows() ? 'start' : this.zAlignTabs() }));
 
   protected readonly buttonClassesSignal = computed(() => {
     const activeIndex = this.activeTabIndex();
@@ -263,10 +271,12 @@ export class ZardTabGroupComponent {
   }
 
   public selectTabByIndex(index: number): void {
-    if (index >= 0 && index < this.tabs().length) {
-      this.setActiveTab(index);
-    } else {
-      console.warn(`Index ${index} outside the range of available tabs.`);
+    if (index < 0) {
+      index = 0;
+    } else if (index >= this.tabs().length) {
+      index = this.tabs().length - 1;
     }
+
+    this.setActiveTab(index);
   }
 }
